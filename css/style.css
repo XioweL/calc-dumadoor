@@ -43,13 +43,59 @@
             margin-bottom: 15px;
         }
         
-        label {
+        /* label {
             display: block;
             margin-bottom: 6px;
             font-weight: 600;
             color: #0a3530;
             font-size: 14px;
-        }
+        } */
+
+        .form-group {
+    position: relative;
+}
+
+label {
+    display: inline-block;
+    position: relative;
+    cursor: help;
+}
+
+/* Tooltip style */
+label::after {
+    content: attr(data-hint); /* ambil text dari atribut data-hint */
+    position: absolute;
+    bottom: 100%; /* muncul di atas label */
+    left: 0;
+    transform: translateY(-6px);
+    background: #0a3530;
+    color: #fff;
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* Segitiga kecil di bawah tooltip */
+label::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 15px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #0a3530 transparent;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+label:hover::after,
+label:hover::before {
+    opacity: 1;
+}
         
         input[type="number"] {
             width: 100%;

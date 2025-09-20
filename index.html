@@ -12,10 +12,13 @@
             <!-- <img src="https://i.ibb.co.com/1GPH4PKG/Whats-App-Image-2025-08-07-at-11-04-11-removebg-preview.png" alt="LOGO YAH" class="logo"> -->
              <img src="images/logo.png" alt="LOGO YAH" class="logo">
         </div>
-        <p class="description">INPUT UKURAN OPENINGAN / GAWANGAN PINTU<br>HANYA UNTUK ESTIMASI HARGA JANGAN DI JADIKAN PATOKAN, CEK KEMBALI !!</p>
+        <p class="description">INPUT UKURAN OPENINGAN / GAWANGAN PINTU / UKURAN DAUN PINTU <br>"ARAHKAN MOUSE KE LEBAR / TINGGI OPENING FOR HINT" <br>HANYA UNTUK ESTIMASI HARGA JANGAN DI JADIKAN PATOKAN, CEK KEMBALI !!</p>
+        
+        <!-- FORM GROUP TEST HOVER-->
+
         
         <div class="form-group">
-            <label for="doorType">Tipe Pintu:</label>
+            <label for="doorType" data-hint="PILIH TYPE PINTU YANG DIINGINKAN">Tipe Pintu:</label>
             <select id="doorType">
                 <option value="economy">Economy</option>
                 <option value="standard" selected>Standard</option>
@@ -24,24 +27,24 @@
         </div>
         
         <div class="form-group">
-            <label for="width">Lebar Opening (cm):</label>
-            <input type="number" id="width" placeholder="Contoh: 82" min="1" step="0.1" inputmode="decimal">
+            <label for="width" data-hint="TAMBAH 4.5 cm (KALO MAU HITUNG DAUN PINTU SAJA) - 'ASUMSI KUSEN DJD'">Lebar Opening (cm):</label>
+            <input type="number" id="width" name="width" placeholder="Contoh: 82 OR 86.5" min="1" step="0.1" inputmode="decimal">
         </div>
         
         <div class="form-group">
-            <label for="height">Tinggi Opening (cm):</label>
-            <input type="number" id="height" placeholder="Contoh: 240" min="1" step="0.1" inputmode="decimal">
+            <label for="height" data-hint="TAMBAH 2.5 cm (KALO MAU HITUNG DAUN PINTU SAJA) - 'ASUMSI KUSEN DJD'">Tinggi Opening (cm):</label>
+            <input type="number" id="height" name="height" placeholder="Contoh: 220 OR 222.5" min="1" step="0.1" inputmode="decimal">
         </div>
         
         <div class="form-group">
-            <label for="frameType">Tipe Kusen:</label>
+            <label for="frameType" data-hint="PILIH JENIS KUSEN, SESUAIKAN DENGAN KEBUTUHAN">Tipe Kusen:</label>
             <select id="frameType">
-                <option value="DJD">DJD (Lebar -4.5cm, Tinggi -2.5cm)</option>
-                <option value="DJE">DJE (Lebar -7.1cm, Tinggi -3.8cm)</option>
-                <option value="DJA">DJA (Lebar -4.5cm, Tinggi -2.5cm)</option>
-                <option value="DJC">DJC (Lebar -7.5cm, Tinggi -4cm)</option>
-                <option value="DJF">DJF (Lebar -8.1cm, Tinggi -4.3cm)</option>
-                <option value="DJG">DJG (Lebar -8.5cm, Tinggi -4.5cm)</option>
+                <option value="DJD">DJD</option>
+                <option value="DJE">DJE</option>
+                <option value="DJA">DJA</option>
+                <option value="DJC">DJC</option>
+                <option value="DJF">DJF</option>
+                <option value="DJG">DJG</option>
             </select>
         </div>
         
@@ -49,7 +52,7 @@
             <div class="option-box">
                 <div class="option-title">Laminating Daun Pintu</div>
                 <div class="form-group">
-                    <label for="doorLaminate">Choose</label>
+                    <label for="doorLaminate" data-hint="PILIH JENIS LAMINATING">Choose</label>
                     <select id="doorLaminate">
                         <option value="none">Tidak Ada</option>
                         <option value="A2">Warna A - 2 Sisi (Rp 477.000)</option>
@@ -63,7 +66,7 @@
             <div class="option-box">
                 <div class="option-title">Laminating Kusen</div>
                 <div class="form-group">
-                    <label for="frameLaminate">Choose</label>
+                    <label for="frameLaminate" data-hint="PILIH JENIS LAMINATING">Choose</label>
                     <select id="frameLaminate">
                         <option value="none">Tidak Ada</option>
                         <option value="A">Warna A (Rp 362.000)</option>
