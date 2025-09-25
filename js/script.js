@@ -18,33 +18,73 @@
         'DJG': { lebar: 8.5, tinggi: 4.5 }
     };
     
-    // Harga kusen berdasarkan tipe dan ukuran
-    function getHargaKusen(frameType, lebarDaun, tinggiDaun) {
-        if (lebarDaun <= 90 && tinggiDaun <= 220) {
-            // Ukuran kecil
-            const hargaKusenKecil = {
-                'DJD': { harga: 331500, keterangan: 'Kusen 230 x1 + 310 x1' },
-                'DJE': { harga: 400500, keterangan: 'Kusen 230 x1 + 310 x1' },
-                'DJA': { harga: 666500, keterangan: 'Kusen 230 x1 + 310 x1' },
-                'DJC': { harga: 426000, keterangan: 'Kusen 230 x1 + 310 x1' },
-                'DJF': { harga: 447000, keterangan: 'Kusen 230 x1 + 310 x1' },
-                'DJG': { harga: 534000, keterangan: 'Kusen 230 x1 + 310 x1' }
-            };
-            return hargaKusenKecil[frameType] || { harga: 0, keterangan: 'Tipe kusen tidak valid' };
-        } else if (lebarDaun <= 92 && tinggiDaun <= 240) {
-            // Ukuran besar
-            const hargaKusenBesar = {
-                'DJD': { harga: 369000, keterangan: 'Kusen 250 x1 + 350 x1' },
-                'DJE': { harga: 447000, keterangan: 'Kusen 250 x1 + 350 x1' },
-                'DJA': { harga: 749500, keterangan: 'Kusen 250 x1 + 350 x1' },
-                'DJC': { harga: 476500, keterangan: 'Kusen 250 x1 + 350 x1' },
-                'DJF': { harga: 497000, keterangan: 'Kusen 250 x1 + 350 x1' },
-                'DJG': { harga: 596500, keterangan: 'Kusen 250 x1 + 350 x1' }
-            };
-            return hargaKusenBesar[frameType] || { harga: 0, keterangan: 'Tipe kusen tidak valid' };
-        }
-        return { harga: 0, keterangan: 'Ukuran tidak valid' };
-    }
+    // // Harga kusen berdasarkan tipe dan ukuran
+    // function getHargaKusen(frameType, lebarOpening, tinggiOpening) {
+    //     if (lebarOpening <= 90 && tinggiOpening <= 220) {
+    //         // Ukuran kecil
+    //         const hargaKusenKecil = {
+    //             'DJD': { harga: 331500, keterangan: 'Kusen 230 x1 + 310 x1' },
+    //             'DJE': { harga: 400500, keterangan: 'Kusen 230 x1 + 310 x1' },
+    //             'DJA': { harga: 666500, keterangan: 'Kusen 230 x1 + 310 x1' },
+    //             'DJC': { harga: 426000, keterangan: 'Kusen 230 x1 + 310 x1' },
+    //             'DJF': { harga: 447000, keterangan: 'Kusen 230 x1 + 310 x1' },
+    //             'DJG': { harga: 534000, keterangan: 'Kusen 230 x1 + 310 x1' }
+    //         };
+    //         return hargaKusenKecil[frameType] || { harga: 0, keterangan: 'Tipe kusen tidak valid' };
+    //     } else if (lebarOpening > 90 && lebarOpening <= 92 && tinggiOpening > 220 && tinggiOpening <= 240) {
+    //         // Ukuran besar
+    //         const hargaKusenSedang = {
+    //             'DJD': { harga: 369000, keterangan: 'Kusen 250 x1 + 350 x1' },
+    //             'DJE': { harga: 447000, keterangan: 'Kusen 250 x1 + 350 x1' },
+    //             'DJA': { harga: 749500, keterangan: 'Kusen 250 x1 + 350 x1' },
+    //             'DJC': { harga: 476500, keterangan: 'Kusen 250 x1 + 350 x1' },
+    //             'DJF': { harga: 497000, keterangan: 'Kusen 250 x1 + 350 x1' },
+    //             'DJG': { harga: 596500, keterangan: 'Kusen 250 x1 + 350 x1' }
+    //         };
+    //         return hargaKusenSedang[frameType] || { harga: 0, keterangan: 'Tipe kusen tidak valid' };
+    //     }
+    //     return { harga: 0, keterangan: 'Ukuran tidak valid' };
+    // }
+
+function getHargaKusen(frameType, lebarOpening, tinggiOpening) {
+    // CONVERT KE NUMBER DULU
+    console.log('DEBUG - lebarOpening:', lebarOpening, 'tipe:', typeof lebarOpening);
+    console.log('DEBUG - tinggiOpening:', tinggiOpening, 'tipe:', typeof tinggiOpening);
+    
+    const lebar = Number(lebarOpening);
+    const tinggi = Number(tinggiOpening);
+    
+    console.log('DEBUG - lebar (number):', lebar);
+    console.log('DEBUG - tinggi (number):', tinggi);
+    console.log('DEBUG - kondisi kecil:', lebar <= 90 && tinggi <= 220);
+
+    
+    if (lebar <= 90 && tinggi <= 220) {
+        // Ukuran kecil
+        const hargaKusenKecil = {
+            'DJD': { harga: 331500, keterangan: 'Kusen 230 x1 + 310 x1' },
+            'DJE': { harga: 400500, keterangan: 'Kusen 230 x1 + 310 x1' },
+            'DJA': { harga: 666500, keterangan: 'Kusen 230 x1 + 310 x1' },
+            'DJC': { harga: 426000, keterangan: 'Kusen 230 x1 + 310 x1' },
+            'DJF': { harga: 447000, keterangan: 'Kusen 230 x1 + 310 x1' },
+            'DJG': { harga: 534000, keterangan: 'Kusen 230 x1 + 310 x1' }
+        };
+        return hargaKusenKecil[frameType] || { harga: 0, keterangan: 'Tipe kusen tidak valid' };
+    } else if (lebar <= 95 && tinggi <= 240) {
+        // Ukuran sedang 
+        const hargaKusenSedang = {
+            'DJD': { harga: 369000, keterangan: 'Kusen 250 x1 + 350 x1' },
+            'DJE': { harga: 447000, keterangan: 'Kusen 250 x1 + 350 x1' },
+            'DJA': { harga: 749500, keterangan: 'Kusen 250 x1 + 350 x1' },
+            'DJC': { harga: 476500, keterangan: 'Kusen 250 x1 + 350 x1' },
+            'DJF': { harga: 497000, keterangan: 'Kusen 250 x1 + 350 x1' },
+            'DJG': { harga: 596500, keterangan: 'Kusen 250 x1 + 350 x1' }
+        };
+        return hargaKusenSedang[frameType] || { harga: 0, keterangan: 'Tipe kusen tidak valid' };
+    } 
+        // Ukuran besar
+    return { harga: 0, keterangan: 'Ukuran opening tidak valid' };
+}
     
     // Harga daun pintu berdasarkan tipe dan ukuran
     const hargaPintu = {
@@ -170,23 +210,23 @@
             }
         }
 
-        if (tipe === 'standard') {
-            if (lebarDaun > 92 || tinggiDaun > 240) {
-                return {
-                    valid: false,
-                    message: `<br> GABISA NGITUNG >240cm PUSING <br>Tipe Standard Ukuran Daun Max 92x280 cm.<br>HITUNG SENDIRI YAK<br>Ukuran Daun ${lebarDaun.toFixed(1)}x${tinggiDaun.toFixed(1)} cm.`
-                };
-            }
-        }
+        // if (tipe === 'standard') {
+        //     if (lebarDaun > 92 || tinggiDaun > 240) {
+        //         return {
+        //             valid: false,
+        //             message: `<br> GABISA NGITUNG >240cm PUSING <br>Tipe Standard Ukuran Daun Max 92x280 cm.<br>HITUNG SENDIRI YAK<br>Ukuran Daun ${lebarDaun.toFixed(1)}x${tinggiDaun.toFixed(1)} cm.`
+        //         };
+        //     }
+        // }
 
-        if (tipe === 'deluxe') {
-            if (lebarDaun < 82 || tinggiDaun > 240) {
-                return {
-                    valid: false,
-                    message: `<br> GABISA NGITUNG >240cm PUSING <br>Tipe Deluxe Ukuran Daun Min 82x210 cm.<br>Ganti Tipe Economy Atau Standard.<br>Ukuran Daun ${lebarDaun.toFixed(1)}x${tinggiDaun.toFixed(1)} cm.`
-                };
-            }
-        }
+        // if (tipe === 'deluxe') {
+        //     if (lebarDaun < 82 || tinggiDaun > 240) {
+        //         return {
+        //             valid: false,
+        //             message: `<br> GABISA NGITUNG >240cm PUSING <br>Tipe Deluxe Ukuran Daun Min 82x210 cm.<br>Ganti Tipe Economy Atau Standard.<br>Ukuran Daun ${lebarDaun.toFixed(1)}x${tinggiDaun.toFixed(1)} cm.`
+        //         };
+        //     }
+        // }
         
         return { valid: true };
     }
@@ -238,7 +278,7 @@
                 <strong>Perhitungan Ukuran Daun Pintu :</strong><br>
                 Lebar Opening : ${width} cm - ${pengurangan.lebar} cm = <strong>${lebarDaun.toFixed(1)} cm</strong><br>
                 Tinggi Opening : ${height} cm - ${pengurangan.tinggi} cm = <strong>${tinggiDaun.toFixed(1)} cm</strong><br>
-                DAUN PINTU DI POTONG JADI :  <strong>(${lebarDaun.toFixed(1)} x ${tinggiDaun.toFixed(1)})
+                DAUN PINTU DI POTONG JADI = <strong>${lebarDaun.toFixed(1)} x ${tinggiDaun.toFixed(1)}</strong>
             `;
             document.getElementById('calculationInfo').style.display = 'block';
         } else {
@@ -275,7 +315,7 @@
         let hargaKusenValue = 0;
         let keteranganKusen = '';
         if (frameType !== 'none') {
-            const kusenInfo = getHargaKusen(frameType, lebarTerdekat, tinggiTerdekat);
+            const kusenInfo = getHargaKusen(frameType, width, height);
             hargaKusenValue = kusenInfo.harga;
             keteranganKusen = kusenInfo.keterangan;
         }
