@@ -4,176 +4,286 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>CALC DUMA DOOR</title>
-<link rel="stylesheet" href="css/style.css">
-<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-<link rel="manifest" href="images/site.webmanifest">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="images/site.webmanifest">
 </head>
 <body>
-    <div class="container">
-        <div class="logo-container">
-            <!-- <img src="https://i.ibb.co.com/1GPH4PKG/Whats-App-Image-2025-08-07-at-11-04-11-removebg-preview.png" alt="LOGO YAH" class="logo"> -->
-             <img src="images/logo.png" alt="LOGO YAH" class="logo">
-        </div>
-        <p class="description">INPUT UKURAN OPENINGAN / GAWANGAN PINTU / UKURAN DAUN PINTU <br>"ARAHKAN MOUSE KE LEBAR / TINGGI OPENING FOR HINT" <br>HANYA UNTUK ESTIMASI HARGA JANGAN DI JADIKAN PATOKAN, CEK KEMBALI !!</p>
-        
-        <!-- FORM GROUP TEST HOVER-->
+    <!-- Floating Menu Button -->
+    <button class="floating-menu-btn" onclick="toggleSidebar()">
+        <span class="menu-icon">☰</span>
+        <span class="menu-text">Menu</span>
+    </button>
 
-        
-        <div class="form-group">
-            <label for="doorType" data-hint="PILIH TYPE PINTU YANG DIINGINKAN">Tipe Pintu:</label>
-            <select id="doorType">
-                <option value="economy">Economy</option>
-                <option value="standard" selected>Standard</option>
-                <option value="deluxe">Deluxe</option>
-            </select>
+    <!-- Modern Sidebar -->
+    <div class="modern-sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-mini">
+                <img src="images/logo.png" alt="Duma Door" class="sidebar-logo">
+            </div>
+            <div class="sidebar-title">
+                <h3>CALC DUMA DOOR</h3>
+                <span class="sidebar-subtitle">Website Calculator Duma Door</span>
+            </div>
+            <button class="sidebar-close" onclick="toggleSidebar()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2"/>
+                </svg>
+            </button>
         </div>
-        
-        <div class="form-group">
-            <label for="width" data-hint="TAMBAH 4.5 cm (KALO MAU HITUNG DAUN PINTU SAJA) - 'ASUMSI KUSEN DJD'">Lebar Opening (cm):</label>
-            <input type="number" id="width" name="width" placeholder="Contoh: 82 OR 86.5" min="1" step="0.1" inputmode="decimal">
+
+        <div class="sidebar-content">
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item active">
+                        <a href="#calculator" class="nav-link" onclick="showSection('calculator')">
+                            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 7h6m-3 0v10m-8 4h16a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <span class="nav-text">Calc Duma Door</span>
+                        </a>
+                    </li>
+                                        <li class="nav-item">
+                        <a href="#deck" class="nav-link" onclick="showSection('deck')">
+                            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <span class="nav-text">Calc Duma Deck ( SOON )</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link" onclick="showSection('about')">
+                            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <span class="nav-text">About</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#news" class="nav-link" onclick="showSection('news')">
+                            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m4 13a2 2 0 01-2-2V7m4 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9m0 0v4m0-4a2 2 0 012-2h2a2 2 0 012 2M9 6v4m0 4h.01" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <span class="nav-text">What's New</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="theme-section">
+                    <div class="theme-info">
+                        <svg class="theme-icon" width="18" height="18" viewBox="0 0 24 24" fill="none">
+                            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        <span>Dark Mode</span>
+                    </div>
+                    <label class="modern-switch">
+                        <input type="checkbox" id="themeToggle">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+                
+                <div class="app-version">
+                    <span>v2.3.1</span><br>
+                    <span>© 2025 XioweL. All Rights Reserved.</span>
+                </div>
+            </div>
         </div>
-        
-        <div class="form-group">
-            <label for="height" data-hint="TAMBAH 2.5 cm (KALO MAU HITUNG DAUN PINTU SAJA) - 'ASUMSI KUSEN DJD'">Tinggi Opening (cm):</label>
-            <input type="number" id="height" name="height" placeholder="Contoh: 220 OR 222.5" min="1" step="0.1" inputmode="decimal">
-        </div>
-        
-        <div class="form-group">
-            <label for="frameType" data-hint="PILIH JENIS KUSEN, SESUAIKAN DENGAN KEBUTUHAN">Tipe Kusen:</label>
-            <select id="frameType">
-                <option value="DJD">DJD</option>
-                <option value="DJE">DJE</option>
-                <option value="DJA">DJA</option>
-                <option value="DJC">DJC</option>
-                <option value="DJF">DJF</option>
-                <option value="DJG">DJG</option>
-            </select>
-        </div>
-        
-        <div class="options-grid">
-            <div class="option-box">
-                <div class="option-title">Laminating Daun Pintu</div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- Content Sections -->
+    <div class="main-content" id="mainContent">
+        <!-- Calculator Section -->
+        <div id="calculator-section" class="content-section active">
+            <div class="container">
+                <div class="logo-container">
+                    <img src="images/logo.png" alt="Duma Door" class="logo">
+                </div>
+                
+                <p class="description">
+                    INPUT UKURAN OPENINGAN / GAWANGAN PINTU / UKURAN DAUN PINTU<br>
+                    "ARAHKAN MOUSE KE LEBAR / TINGGI OPENING FOR HINT"<br>
+                    HANYA UNTUK ESTIMASI HARGA JANGAN DI JADIKAN PATOKAN, CEK KEMBALI !!
+                </p>
+                
                 <div class="form-group">
-                    <label for="doorLaminate" data-hint="PILIH JENIS LAMINATING">Choose</label>
-                    <select id="doorLaminate">
-                        <option value="none">Tidak Ada</option>
-                        <option value="A2">Warna A - 2 Sisi (Rp 477.000)</option>
-                        <option value="A6">Warna A - 6 Sisi (Rp 557.000)</option>
-                        <option value="B2">Warna B - 2 Sisi (Rp 392.000)</option>
-                        <option value="B6">Warna B - 6 Sisi (Rp 477.000)</option>
+                    <label for="doorType" data-hint="PILIH TYPE PINTU YANG DIINGINKAN">Tipe Pintu:</label>
+                    <select id="doorType">
+                        <option value="economy">Economy</option>
+                        <option value="standard" selected>Standard</option>
+                        <option value="deluxe">Deluxe</option>
                     </select>
                 </div>
-            </div>
-            
-            <div class="option-box">
-                <div class="option-title">Laminating Kusen</div>
+                
                 <div class="form-group">
-                    <label for="frameLaminate" data-hint="PILIH JENIS LAMINATING">Choose</label>
-                    <select id="frameLaminate">
-                        <option value="none">Tidak Ada</option>
-                        <option value="A">Warna A (Rp 362.000)</option>
-                        <option value="B">Warna B (Rp 297.000)</option>
+                    <label for="width" data-hint="TAMBAH 4.5 cm (KALO MAU HITUNG DAUN PINTU SAJA) - 'ASUMSI KUSEN DJD'">Lebar Opening (cm):</label>
+                    <input type="number" id="width" placeholder="Contoh: 82 OR 86.5" min="1" step="0.1" inputmode="decimal">
+                </div>
+                
+                <div class="form-group">
+                    <label for="height" data-hint="TAMBAH 2.5 cm (KALO MAU HITUNG DAUN PINTU SAJA) - 'ASUMSI KUSEN DJD'">Tinggi Opening (cm):</label>
+                    <input type="number" id="height" placeholder="Contoh: 220 OR 222.5" min="1" step="0.1" inputmode="decimal">
+                </div>
+                
+                <div class="form-group">
+                    <label for="frameType" data-hint="PILIH JENIS KUSEN, SESUAIKAN DENGAN KEBUTUHAN">Tipe Kusen:</label>
+                    <select id="frameType">
+                        <option value="DJD">DJD</option>
+                        <option value="DJE">DJE</option>
+                        <option value="DJA">DJA</option>
+                        <option value="DJC">DJC</option>
+                        <option value="DJF">DJF</option>
+                        <option value="DJG">DJG</option>
                     </select>
                 </div>
-            </div>
-        </div>
-        
-        <div id="infoMessage" class="info-message">
-            <!-- Pesan info akan ditampilkan di sini -->
-        </div>
-        
-        <div id="errorMessage" class="error-message">
-            <!-- Pesan error akan ditampilkan di sini -->
-        </div>
-        
-        <div id="calculationInfo" class="calculation-info">
-            <!-- Informasi perhitungan akan ditampilkan di sini -->
-        </div>
-        
-        <button onclick="hitungHarga()">HITUNG</button>
-        
-        <div id="result" class="result">
-            <h2 class="result-title">Rincian Harga Duma Door</h2>
-            
-            <div class="result-item">
-                <span id="labelDoorType">Tipe Pintu :</span>
-                <span id="doorTypeName" class="price">Standard</span>
-            </div>
-            
-            <div class="result-item">
-                <span id="labelDaunPintu">Daun Pintu :</span>
-                <span id="hargaDaunPintu" class="price">Rp 0</span>
-            </div>
-            
-            <div class="result-item">
-                <span>Ongkos Potong :</span>
-                <span id="ongkosPotong" class="price">Rp 0</span>
-            </div>
-            
-            <div class="result-item">
-                <span id="labelFrameType">Tipe Kusen :</span>
-                <span id="frameTypeName" class="price">DJD</span>
-            </div>
-            
-            <div class="result-item">
-                <span id="labelKusen">Kusen :</span>
-                <span id="hargaKusen" class="price">Rp 0</span>
-            </div>
-            
-            <div class="result-section">
-                <div class="result-item">
-                    <!-- Spacer for layout -->
+                
+                <div class="options-grid">
+                    <div class="option-box">
+                        <div class="option-title">Laminating Daun Pintu</div>
+                        <div class="form-group">
+                            <label for="doorLaminate" data-hint="PILIH JENIS LAMINATING">Choose</label>
+                            <select id="doorLaminate">
+                                <option value="none">Tidak Ada</option>
+                                <option value="A2">Warna A - 2 Sisi (Rp 477.000)</option>
+                                <option value="A6">Warna A - 6 Sisi (Rp 557.000)</option>
+                                <option value="B2">Warna B - 2 Sisi (Rp 392.000)</option>
+                                <option value="B6">Warna B - 6 Sisi (Rp 477.000)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="option-box">
+                        <div class="option-title">Laminating Kusen</div>
+                        <div class="form-group">
+                            <label for="frameLaminate" data-hint="PILIH JENIS LAMINATING">Choose</label>
+                            <select id="frameLaminate">
+                                <option value="none">Tidak Ada</option>
+                                <option value="A">Warna A (Rp 362.000)</option>
+                                <option value="B">Warna B (Rp 297.000)</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="result-item">
-                <span id="labelLamDaun">Laminating Daun Pintu</span>
-                <span id="hargaLamDaun" class="price">Rp 0</span>
-            </div>
-            
-            <div class="result-item">
-                <span id="labelLamKusen">Laminating Kusen</span>
-                <span id="hargaLamKusen" class="price">Rp 0</span>
-            </div>
-            
-           <div class="result-section">
-                <div class="result-total">
-                    <div class="result-finishing">
-                        <span id="BATAS">UNFINISHED</span>
+                
+                <div id="infoMessage" class="info-message"></div>
+                <div id="errorMessage" class="error-message"></div>
+                <div id="calculationInfo" class="calculation-info"></div>
+                
+                <button onclick="hitungHarga()">HITUNG</button>
+                
+                <div id="result" class="result">
+                    <h2 class="result-title">Rincian Harga Duma Door</h2>
+                    
+                    <div class="result-item">
+                        <span>Tipe Pintu :</span>
+                        <span id="doorTypeName" class="price">Standard</span>
                     </div>
-                    <div class="result-finishing-note">
-                        <span id="BATAS">TANPA LAMINATING</span>
-                    </div>
+                    
                     <div class="result-item">
                         <span>Daun Pintu :</span>
-                        <span id="totalWithoutKusen" class="price">Rp 0</span>
+                        <span id="hargaDaunPintu" class="price">Rp 0</span>
                     </div>
+                    
                     <div class="result-item">
-                        <span>Daun Pintu + Kusen :</span>
-                        <span id="totalUnfinished" class="price">Rp 0</span>
+                        <span>Ongkos Potong :</span>
+                        <span id="ongkosPotong" class="price">Rp 0</span>
                     </div>
-                    <div class="result-finishing">
-                        <span id="BATAS">FINISHED</span>
-                    </div>
-                    <div class="result-finishing-note">
-                        <span id="BATAS">FINISHING LAMINATING</span>
-                    </div>
+                    
                     <div class="result-item">
-                        <span id="labelFinishedWithoutKusen">Daun Pintu :</span>
-                        <span id="totalFinishedWithoutKusen" class="price">Rp 0</span>
+                        <span>Tipe Kusen :</span>
+                        <span id="frameTypeName" class="price">DJD</span>
                     </div>
+                    
                     <div class="result-item">
-                        <span id="labelFinished">Daun Pintu + Kusen :</span>
-                        <span id="totalFinished" class="price">Rp 0</span>
+                        <span>Kusen :</span>
+                        <span id="hargaKusen" class="price">Rp 0</span>
                     </div>
+                    
+                    <div class="result-section">
+                        <div class="result-item">
+                            <span>Laminating Daun Pintu</span>
+                            <span id="hargaLamDaun" class="price">Rp 0</span>
+                        </div>
+                        
+                        <div class="result-item">
+                            <span>Laminating Kusen</span>
+                            <span id="hargaLamKusen" class="price">Rp 0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="result-section">
+                        <div class="result-total">
+                            <div class="result-finishing">
+                                <span>UNFINISHED</span>
+                            </div>
+                            <div class="result-finishing-note">
+                                <span>TANPA LAMINATING</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Daun Pintu :</span>
+                                <span id="totalWithoutKusen" class="price">Rp 0</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Daun Pintu + Kusen :</span>
+                                <span id="totalUnfinished" class="price">Rp 0</span>
+                            </div>
+                            
+                            <div class="result-finishing">
+                                <span>FINISHED</span>
+                            </div>
+                            <div class="result-finishing-note">
+                                <span>FINISHING LAMINATING</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Daun Pintu :</span>
+                                <span id="totalFinishedWithoutKusen" class="price">Rp 0</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Daun Pintu + Kusen :</span>
+                                <span id="totalFinished" class="price">Rp 0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="note">Tekan ENTER setelah mengisi form untuk menghitung otomatis</p>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div id="about-section" class="content-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>About CALC DUMA DOOR</h1>
+                    <p>Learn more about our application</p>
+                </div>
+                <div class="about-content">
+                    <p>Aplikasi kalkulator harga pintu Duma Door untuk membantu menghitung estimasi biaya dengan akurat. 😝</p>
                 </div>
             </div>
         </div>
-        <p class="note">Tekan ENTER setelah mengisi form untuk menghitung otomatis</p>
-        <p class="note">© 2025 XioweL. All Rights Reserved.</p>
+
+        <!-- News Section -->
+        <div id="news-section" class="content-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>What's New</h1>
+                    <p>Latest updates and features</p>
+                </div>
+                <div class="news-content">
+                    <p>💥 Menghitung Pintu >240cm </p>
+                    <p>💥 Fix Bugs </p>
+                </div>
+            </div>
+        </div>
     </div>
+
     <script src="./js/script.js"></script>
 </body>
 </html>

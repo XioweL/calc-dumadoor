@@ -438,3 +438,94 @@ function getHargaKusen(frameType, lebarOpening, tinggiOpening) {
             });
         });
     });
+
+// SCRIPT SIDEBAR
+
+ // Modern Sidebar Functions
+let sidebarVisible = false;
+
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const mainContent = document.getElementById('mainContent');
+    
+    sidebarVisible = !sidebarVisible;
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+    
+    if (window.innerWidth < 768) {
+        mainContent.classList.toggle('active');
+    }
+}
+
+function showSection(sectionName) {
+    // Update nav items
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    
+    // Activate current nav item
+    document.querySelector(`.nav-link[href="#${sectionName}"]`).parentElement.classList.add('active');
+    
+    // Hide all sections
+    document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    // Show selected section
+    document.getElementById(sectionName + '-section').classList.add('active');
+    
+    // Close sidebar on mobile
+    if (window.innerWidth < 768 && sidebarVisible) {
+        toggleSidebar();
+    }
+}
+
+// Close sidebar when clicking outside on mobile
+document.addEventListener('click', function(event) {
+    const sidebar = document.getElementById('sidebar');
+    const menuBtn = document.querySelector('.floating-menu-btn');
+    
+    if (window.innerWidth < 768 && sidebarVisible && 
+        !sidebar.contains(event.target) && 
+        !menuBtn.contains(event.target)) {
+        toggleSidebar();
+    }
+});
+
+// Handle window resize
+window.addEventListener('resize', function() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    
+    if (window.innerWidth >= 768) {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+        sidebarVisible = false;
+    }
+});
+
+// Theme toggle function (tetap sama)
+function setupThemeToggle() {
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    themeToggle.checked = savedTheme === 'dark';
+    
+    themeToggle.addEventListener('change', function() {
+        if (this.checked) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+        }
+    });
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+    setupThemeToggle();
+    // ... kode event listener existing lainnya ...
+});
