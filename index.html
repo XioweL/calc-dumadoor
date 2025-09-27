@@ -178,79 +178,72 @@
                 <button onclick="hitungHarga()">HITUNG</button>
                 
                 <div id="result" class="result">
-                    <h2 class="result-title">Rincian Harga Duma Door</h2>
-                    
-                    <div class="result-item">
-                        <span>Tipe Pintu :</span>
-                        <span id="doorTypeName" class="price">Standard</span>
-                    </div>
-                    
-                    <div class="result-item">
-                        <span>Daun Pintu :</span>
-                        <span id="hargaDaunPintu" class="price">Rp 0</span>
-                    </div>
-                    
-                    <div class="result-item">
-                        <span>Ongkos Potong :</span>
-                        <span id="ongkosPotong" class="price">Rp 0</span>
-                    </div>
-                    
-                    <div class="result-item">
-                        <span>Tipe Kusen :</span>
-                        <span id="frameTypeName" class="price">DJD</span>
-                    </div>
-                    
-                    <div class="result-item">
-                        <span>Kusen :</span>
-                        <span id="hargaKusen" class="price">Rp 0</span>
-                    </div>
-                    
-                    <div class="result-section">
-                        <div class="result-item">
-                            <span>Laminating Daun Pintu</span>
-                            <span id="hargaLamDaun" class="price">Rp 0</span>
-                        </div>
-                        
-                        <div class="result-item">
-                            <span>Laminating Kusen</span>
-                            <span id="hargaLamKusen" class="price">Rp 0</span>
-                        </div>
-                    </div>
-                    
-                    <div class="result-section">
-                        <div class="result-total">
-                            <div class="result-finishing">
-                                <span>UNFINISHED</span>
-                            </div>
-                            <div class="result-finishing-note">
-                                <span>TANPA LAMINATING</span>
-                            </div>
-                            <div class="result-item">
-                                <span>Daun Pintu :</span>
-                                <span id="totalWithoutKusen" class="price">Rp 0</span>
-                            </div>
-                            <div class="result-item">
-                                <span>Daun Pintu + Kusen :</span>
-                                <span id="totalUnfinished" class="price">Rp 0</span>
-                            </div>
-                            
-                            <div class="result-finishing">
-                                <span>FINISHED</span>
-                            </div>
-                            <div class="result-finishing-note">
-                                <span>FINISHING LAMINATING</span>
-                            </div>
-                            <div class="result-item">
-                                <span>Daun Pintu :</span>
-                                <span id="totalFinishedWithoutKusen" class="price">Rp 0</span>
-                            </div>
-                            <div class="result-item">
-                                <span>Daun Pintu + Kusen :</span>
-                                <span id="totalFinished" class="price">Rp 0</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <h2 class="result-title">Rincian Harga Duma Door</h2>
+
+    <div class="result-item">
+        <span id="labelDoorType">Tipe Pintu :</span>
+        <span id="doorTypeName" class="price">-</span>
+    </div>
+
+    <div class="result-item">
+        <span id="labelDaunPintu">Daun Pintu :</span>
+        <span id="hargaDaunPintu" class="price">Rp 0</span>
+    </div>
+
+    <div class="result-item">
+        <span>Ongkos Potong :</span>
+        <span id="ongkosPotong" class="price">Rp 0</span>
+    </div>
+
+    <div class="result-item">
+        <span id="labelFrameType">Tipe Kusen :</span>
+        <span id="frameTypeName" class="price">-</span>
+    </div>
+
+    <div class="result-item">
+        <span id="labelKusen">Kusen :</span>
+        <span id="hargaKusen" class="price">Rp 0</span>
+    </div>
+
+    <div class="result-item">
+        <span id="labelLamDaun">Laminating Daun Pintu :</span>
+        <span id="hargaLamDaun" class="price">Rp 0</span>
+    </div>
+
+    <div class="result-item">
+        <span id="labelLamKusen">Laminating Kusen :</span>
+        <span id="hargaLamKusen" class="price">Rp 0</span>
+    </div>
+
+    <div class="result-section">
+        <div class="result-total">
+            <div class="result-finishing">
+                <span id="BATAS">UNFINISHED</span>
+            </div>
+            <div class="result-item">
+                <span>Daun Pintu :</span>
+                <span id="totalWithoutKusen" class="price">Rp 0</span>
+            </div>
+            <div class="result-item">
+                <span>Daun Pintu + Kusen :</span>
+                <span id="totalUnfinished" class="price">Rp 0</span>
+            </div>
+
+            <div class="result-finishing">
+                <span id="BATAS">FINISHED</span>
+            </div>
+            <div class="result-item">
+                <span id="labelFinishedWithoutKusen">Daun Pintu :</span>
+                <span id="totalFinishedWithoutKusen" class="price">Rp 0</span>
+            </div>
+            <div class="result-item">
+                <span id="labelFinished">Daun Pintu + Kusen :</span>
+                <span id="totalFinished" class="price">Rp 0</span>
+            </div>
+        </div>
+    </div>
+</div>
+
                 
                 <p class="note">Tekan ENTER setelah mengisi form untuk menghitung otomatis</p>
             </div>
