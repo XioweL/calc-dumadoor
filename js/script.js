@@ -26,7 +26,7 @@ function getHargaKusen(frameType, lebarOpening, tinggiOpening) {
     
     const lebar = Number(lebarOpening);
     const tinggi = Number(tinggiOpening);
-    
+
     console.log('DEBUG - lebar (number):', lebar);
     console.log('DEBUG - tinggi (number):', tinggi);
     console.log('DEBUG - kondisi kecil:', lebar <= 90 && tinggi <= 220);
@@ -329,12 +329,11 @@ function getHargaKusen(frameType, lebarOpening, tinggiOpening) {
             
             // JIKA PINTU >240 MAKA LAMINATE KUSEN + SEKIAN
 
-
             // JIKA PINTU >240 MAKA LAMINATE X2
-            const tinggiDaun = parseFloat(document.getElementById('height').value);
+            // const tinggiInput = parseFloat(document.getElementById('height').value);
             if (tinggiDaun > 240 ) {
-                hargaLamDaun = Math.round(hargaLamDaun * 2);
-                labelLamDaun = `Laminating Daun Pintu (${warna}) ${sisi} - ( >240 * 2 ) `;
+                hargaLamDaun = Math.round(hargaLamDaun * 1.5);
+                labelLamDaun = `Laminating Daun Pintu (${warna}) ${sisi} - ( >240 * 1.5 ) `;
             } else {
                 labelLamDaun = `Laminating Daun Pintu (${warna}) ${sisi} `;
             }
@@ -427,7 +426,8 @@ function getHargaKusen(frameType, lebarOpening, tinggiOpening) {
             document.getElementById('height'),
             document.getElementById('frameType'),
             document.getElementById('doorLaminate'),
-            document.getElementById('frameLaminate')
+            document.getElementById('frameLaminate'),
+            setupThemeToggle()
         ];
         
         inputs.forEach(input => {
@@ -523,9 +523,3 @@ function setupThemeToggle() {
         }
     });
 }
-
-// Initialize
-document.addEventListener('DOMContentLoaded', function() {
-    setupThemeToggle();
-    // ... kode event listener existing lainnya ...
-});
