@@ -57,7 +57,7 @@ function getHargaKusen(frameType, lebarOpening, tinggiOpening) {
             'DJG': { harga: 596500, keterangan: 'Kusen 250 x1 + 350 x1' }
         };
         return hargaKusenSedang[frameType] || { harga: 0, keterangan: 'Tipe kusen tidak valid' };
-    } else if (lebar <=90 && tinggi <=260) {
+    } else if (lebar <=90 && tinggi <=250) {
         // Ukuran besar
         const hargaKusenBesar = {
             'DJD': { harga: 369000, keterangan: 'Kusen 250 x1 + 350 x1' },
