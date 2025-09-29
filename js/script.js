@@ -57,15 +57,15 @@ function getHargaKusen(frameType, lebarOpening, tinggiOpening) {
             'DJG': { harga: 596500, keterangan: 'Kusen 250 x1 + 350 x1' }
         };
         return hargaKusenSedang[frameType] || { harga: 0, keterangan: 'Tipe kusen tidak valid' };
-    } else if (lebar <=90 && tinggi <=250) {
+    } else if (lebar <=90 && tinggi <=260) {
         // Ukuran besar
         const hargaKusenBesar = {
-            'DJD': { harga: 369000, keterangan: 'Kusen 250 x1 + 350 x1' },
-            'DJE': { harga: 447000, keterangan: 'Kusen 250 x1 + 350 x1' },
-            'DJA': { harga: 749500, keterangan: 'Kusen 250 x1 + 350 x1' },
-            'DJC': { harga: 476500, keterangan: 'Kusen 250 x1 + 350 x1' },
-            'DJF': { harga: 497000, keterangan: 'Kusen 250 x1 + 350 x1' },
-            'DJG': { harga: 596500, keterangan: 'Kusen 250 x1 + 350 x1' }
+            'DJD': { harga: 406000, keterangan: 'Kusen 310 x1 + 350 x1' },
+            'DJE': { harga: 492500, keterangan: 'Kusen 310 x1 + 350 x1' },
+            'DJA': { harga: 825000, keterangan: 'Kusen 310 x1 + 350 x1' },
+            'DJC': { harga: 521500, keterangan: 'Kusen 310 x1 + 350 x1' },
+            'DJF': { harga: 546500, keterangan: 'Kusen 310 x1 + 350 x1' },
+            'DJG': { harga: 654500, keterangan: 'Kusen 310 x1 + 350 x1' }
         };
         return hargaKusenBesar[frameType] || { harga: 0, keterangan: 'Tipe kusen tidak valid' };
     } else if (lebar <=100 && tinggi <=280 ) {
