@@ -58,44 +58,7 @@ label {
     cursor: help;
 }
 
-/* Tooltip style */
-label::after {
-    content: attr(data-hint);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-8px);
-    background: #0a3530;
-    color: #fff;
-    font-size: 11px;
-    padding: 8px 12px;
-    border-radius: 4px;
-    white-space: normal;
-    width: 200px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease-in-out;
-    z-index: 1000;
-    text-align: center;
-}
 
-label::before {
-    content: "";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent #0a3530 transparent;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-}
-
-label:hover::after,
-label:hover::before {
-    opacity: 1;
-}
 
 input[type="number"] {
     width: 100%;
