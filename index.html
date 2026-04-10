@@ -113,6 +113,14 @@
                     HANYA UNTUK ESTIMASI HARGA JANGAN DI JADIKAN PATOKAN, CEK KEMBALI !!
                 </p>
                 
+                                 <div class="form-group">
+                    <label for="hitungApa" data-hint="MAU UKUR APA ?">Mau Hitung Apa ?</label>
+                    <select id="hitungApa">
+                        <option value="daunP">Daun Pintu</option>
+                        <option value="openAN">Openingan</option>
+                    </select>
+                </div>
+
                 <div class="form-group">
                     <label for="doorType" data-hint="PILIH TYPE PINTU YANG DIINGINKAN">Tipe Pintu:</label>
                     <select id="doorType">
@@ -122,19 +130,21 @@
                     </select>
                 </div>
                 
-                <div class="form-group">
-                    <label for="width" data-hint="TAMBAH 4.5 cm (KALO MAU HITUNG DAUN PINTU SAJA) - 'ASUMSI KUSEN DJD'">Lebar Opening (cm):</label>
-                    <input type="number" id="width" placeholder="Contoh: 82 OR 86.5" min="1" step="0.1" inputmode="decimal">
-                </div>
-                
-                <div class="form-group">
-                    <label for="height" data-hint="TAMBAH 2.5 cm (KALO MAU HITUNG DAUN PINTU SAJA) - 'ASUMSI KUSEN DJD'">Tinggi Opening (cm):</label>
-                    <input type="number" id="height" placeholder="Contoh: 220 OR 222.5" min="1" step="0.1" inputmode="decimal">
-                </div>
+
+<div class="form-group">
+    <label for="width" id="labelLebar" data-hint="">Lebar Opening (cm):</label>
+    <input type="number" id="width" placeholder="Contoh: 82 OR 86.5" ... >
+</div>
+
+<div class="form-group">
+    <label for="height" id="labelTinggi" data-hint="TAMBAH 2.5 cm...">Tinggi Opening (cm):</label>
+    <input type="number" id="height" placeholder="Contoh: 220 OR 222.5" ... >
+</div>
                 
                 <div class="form-group">
                     <label for="frameType" data-hint="PILIH JENIS KUSEN, SESUAIKAN DENGAN KEBUTUHAN">Tipe Kusen:</label>
                     <select id="frameType">
+                        <option value="none">Tidak Ada</option>
                         <option value="DJD">DJD</option>
                         <option value="DJE">DJE</option>
                         <option value="DJA">DJA</option>
@@ -143,7 +153,82 @@
                         <option value="DJG">DJG</option>
                     </select>
                 </div>
+
                 
+<div class="options-grid">
+    <div class="option-box">
+        <div class="option-title">Add-ons (Opsional)</div>
+        <div class="addon-item">
+            <label class="modern-checkbox">
+                <input type="checkbox" id="addonVerstek" value="30000">
+                <span class="checkbox-text">Ongkos Verstek (Rp 30.000)</span>
+            </label>
+        </div>
+        <div class="addon-item">
+            <label class="modern-checkbox">
+                <input type="checkbox" id="addonAlumini" value="180000">
+                <span class="checkbox-text">Aluminium Strip (Rp 180.000)</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="option-box">
+        <div class="option-title">Diskon</div>
+        <div class="input-group" style="margin-top: 10px;">
+            <label>Diskon Produk (%) :</label>
+            <input type="number" id="discountPersen" placeholder="0" min="0" max="100" 
+                   style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+            <small style="color: #666; font-style: italic;">*Hanya memotong harga Daun & Kusen</small>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Event listener select tipe perhitungan -->
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    // 1. Ambil kedua elemen dropdown
+    const productTypeSelect = document.getElementById('hitungApa');
+    const frameTypeSelect = document.getElementById('frameType');
+    // Ambil elemen labelnya dulu
+const labelLebar = document.getElementById('labelLebar');
+const labelTinggi = document.getElementById('labelTinggi');
+
+    // 2. Tambahkan Event Listener ke dropdown 'Jenis Produk'
+    productTypeSelect.addEventListener('change', function() {
+        // Ambil nilai yang baru saja dipilih
+        const selectedProductType = this.value;
+
+        // 3. Terapkan logika IF
+        if (selectedProductType === 'openAN') {
+            // IF productType ke Openingan, set Tipe Kusen ke DJD
+            frameTypeSelect.value = 'DJD';
+            console.log("Pilihan: Openingan. Tipe Kusen diatur ke DJD.");
+            
+            labelLebar.innerText = "Lebar Opening (cm):";
+            labelTinggi.innerText = "Tinggi Opening (cm):";
+        } else if (selectedProductType === 'daunP') {
+            // IF productType ke Daun Pintu, set Tipe Kusen ke 'none' (Tidak Ada)
+            frameTypeSelect.value = 'none';
+            console.log("Pilihan: Daun Pintu. Tipe Kusen diatur ke Tidak Ada.");
+
+            // TAMBAHAN: Ganti judul labelnya
+    labelLebar.innerText = "Lebar Daun (cm):";
+    labelTinggi.innerText = "Tinggi Daun (cm):";
+            
+        } else {
+// Kembalikan ke judul awal jika memilih selain Daun Pintu
+
+        }
+    });
+
+    // Opsional: Jalankan logika sekali saat halaman dimuat
+    // agar nilai awal juga disesuaikan berdasarkan pilihan default di 'hitungApa'
+    productTypeSelect.dispatchEvent(new Event('change'));
+});
+</script>
+                  
                 <div class="options-grid">
                     <div class="option-box">
                         <div class="option-title">Laminating Daun Pintu</div>
@@ -171,7 +256,7 @@
                         </div>
                     </div>
                 </div>
-                
+       
                 <div id="infoMessage" class="info-message"></div>
                 <div id="errorMessage" class="error-message"></div>
                 <div id="calculationInfo" class="calculation-info"></div>
@@ -196,6 +281,16 @@
         <span id="ongkosPotong" class="price">Rp 0</span>
     </div>
 
+    <div class="result-item" id="rowVerstek" style="display: none;">
+    <span>Ongkos Verstek :</span>
+    <span id="hargaVerstek" class="price">Rp 0</span>
+</div>
+
+<div class="result-item" id="rowAlumini" style="display: none;">
+    <span>Aluminium Strip :</span>
+    <span id="hargaAlumini" class="price">Rp 0</span>
+</div>
+
     <div class="result-item">
         <span id="labelFrameType">Tipe Kusen :</span>
         <span id="frameTypeName" class="price">-</span>
@@ -216,6 +311,7 @@
         <span id="hargaLamKusen" class="price">Rp 0</span>
     </div>
 
+
     <div class="result-section">
         <div class="result-total">
             <div class="result-finishing">
@@ -225,10 +321,9 @@
                 <span>Daun Pintu :</span>
                 <span id="totalWithoutKusen" class="price">Rp 0</span>
             </div>
-            <div class="result-item">
-                <span>Daun Pintu + Kusen :</span>
-                <span id="totalUnfinished" class="price">Rp 0</span>
-            </div>
+<div class="result-item" id="rowTotalUnfinished"> <span>Daun Pintu + Kusen :</span>
+    <span id="totalUnfinished" class="price">Rp 0</span>
+</div>
 
             <div class="result-finishing">
                 <span id="BATAS">FINISHED</span>
@@ -237,14 +332,17 @@
                 <span id="labelFinishedWithoutKusen">Daun Pintu :</span>
                 <span id="totalFinishedWithoutKusen" class="price">Rp 0</span>
             </div>
-            <div class="result-item">
-                <span id="labelFinished">Daun Pintu + Kusen :</span>
-                <span id="totalFinished" class="price">Rp 0</span>
-            </div>
+<div class="result-item" id="rowTotalFinished"> <span id="labelFinished">Daun Pintu + Kusen :</span>
+    <span id="totalFinished" class="price">Rp 0</span>
+</div>
         </div>
     </div>
 </div>
+<div class="action-buttons">
 
+    <button onclick="copyToClipboard()" class="btn-copy">Salin Rincian</button>
+    <button onclick="resetForm()" class="btn-reset">Hitung Ulang</button>
+</div>
                 
                 <p class="note">Tekan ENTER setelah mengisi form untuk menghitung otomatis</p>
             </div>
@@ -300,6 +398,7 @@ document.addEventListener("keydown", function(e) {
     }
 });
 </script>
+
 
 </body>
 </html>

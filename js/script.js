@@ -37,86 +37,86 @@ function getHargaKusen(frameType, lebarOpening, tinggiOpening) {
     
     if (lebar <= 90 && tinggi <= 220) {
         // Ukuran kecil
-        const hargaKusenKecil = {
-            'DJD': { harga: 331500, keterangan: 'Kusen 230 x1 + 310 x1' },
-            'DJE': { harga: 400500, keterangan: 'Kusen 230 x1 + 310 x1' },
-            'DJA': { harga: 666500, keterangan: 'Kusen 230 x1 + 310 x1' },
-            'DJC': { harga: 426000, keterangan: 'Kusen 230 x1 + 310 x1' },
-            'DJF': { harga: 447000, keterangan: 'Kusen 230 x1 + 310 x1' },
-            'DJG': { harga: 534000, keterangan: 'Kusen 230 x1 + 310 x1' }
+       const hargaKusenKecil = {
+            'DJD': { harga: 348000, keterangan: 'Kusen 230 x1 + 310 x1' },
+            'DJE': { harga: 422500, keterangan: 'Kusen 230 x1 + 310 x1' },
+            'DJA': { harga: 700000, keterangan: 'Kusen 230 x1 + 310 x1' },
+            'DJC': { harga: 448000, keterangan: 'Kusen 230 x1 + 310 x1' },
+            'DJF': { harga: 469500, keterangan: 'Kusen 230 x1 + 310 x1' },
+            'DJG': { harga: 561000, keterangan: 'Kusen 230 x1 + 310 x1' }
         };
         return hargaKusenKecil[frameType] || { harga: 0, keterangan: 'Tipe kusen tidak valid' };
     } else if (lebar <= 100 && tinggi <= 240) {
         // Ukuran sedang 
         const hargaKusenSedang = {
-            'DJD': { harga: 369000, keterangan: 'Kusen 250 x1 + 350 x1' },
-            'DJE': { harga: 447000, keterangan: 'Kusen 250 x1 + 350 x1' },
-            'DJA': { harga: 749500, keterangan: 'Kusen 250 x1 + 350 x1' },
-            'DJC': { harga: 476500, keterangan: 'Kusen 250 x1 + 350 x1' },
-            'DJF': { harga: 497000, keterangan: 'Kusen 250 x1 + 350 x1' },
-            'DJG': { harga: 596500, keterangan: 'Kusen 250 x1 + 350 x1' }
+            'DJD': { harga: 388000, keterangan: 'Kusen 250 x1 + 350 x1' },
+            'DJE': { harga: 469500, keterangan: 'Kusen 250 x1 + 350 x1' },
+            'DJA': { harga: 787000, keterangan: 'Kusen 250 x1 + 350 x1' },
+            'DJC': { harga: 500500, keterangan: 'Kusen 250 x1 + 350 x1' },
+            'DJF': { harga: 522000, keterangan: 'Kusen 250 x1 + 350 x1' },
+            'DJG': { harga: 626500, keterangan: 'Kusen 250 x1 + 350 x1' }
         };
         return hargaKusenSedang[frameType] || { harga: 0, keterangan: 'Tipe kusen tidak valid' };
     } else if (lebar <=90 && tinggi <=260) {
         // Ukuran besar
         const hargaKusenBesar = {
-            'DJD': { harga: 406000, keterangan: 'Kusen 310 x1 + 350 x1' },
-            'DJE': { harga: 492500, keterangan: 'Kusen 310 x1 + 350 x1' },
-            'DJA': { harga: 825000, keterangan: 'Kusen 310 x1 + 350 x1' },
-            'DJC': { harga: 521500, keterangan: 'Kusen 310 x1 + 350 x1' },
-            'DJF': { harga: 546500, keterangan: 'Kusen 310 x1 + 350 x1' },
-            'DJG': { harga: 654500, keterangan: 'Kusen 310 x1 + 350 x1' }
+            'DJD': { harga: 426500, keterangan: 'Kusen 310 x1 + 350 x1' },
+            'DJE': { harga: 517500, keterangan: 'Kusen 310 x1 + 350 x1' },
+            'DJA': { harga: 866500, keterangan: 'Kusen 310 x1 + 350 x1' },
+            'DJC': { harga: 548000, keterangan: 'Kusen 310 x1 + 350 x1' },
+            'DJF': { harga: 574000, keterangan: 'Kusen 310 x1 + 350 x1' },
+            'DJG': { harga: 687500, keterangan: 'Kusen 310 x1 + 350 x1' }
         };
         return hargaKusenBesar[frameType] || { harga: 0, keterangan: 'Tipe kusen tidak valid' };
     } else if (lebar <=100 && tinggi <=280 ) {
         // Ukuran extra besar
-        const hargaKusenExtraBesar = {
-            'DJD': { harga: 522000, keterangan: 'Kusen 230 x1 + 310 x2' },
-            'DJE': { harga: 634000, keterangan: 'Kusen 230 x1 + 310 x2' },
-            'DJA': { harga: 1052000, keterangan: 'Kusen 230 x1 + 310 x2' },
-            'DJC': { harga: 670000, keterangan: 'Kusen 230 x1 + 310 x2' },
-            'DJF': { harga: 703500, keterangan: 'Kusen 230 x1 + 310 x2' },
-            'DJG': { harga: 840500, keterangan: 'Kusen 230 x1 + 310 x2' }
-};
+const hargaKusenExtraBesar = {
+            'DJD': { harga: 548000, keterangan: 'Kusen 230 x1 + 310 x2' },
+            'DJE': { harga: 666500, keterangan: 'Kusen 230 x1 + 310 x2' },
+            'DJA': { harga: 1105000, keterangan: 'Kusen 230 x1 + 310 x2' },
+            'DJC': { harga: 704500, keterangan: 'Kusen 230 x1 + 310 x2' },
+            'DJF': { harga: 739000, keterangan: 'Kusen 230 x1 + 310 x2' },
+            'DJG': { harga: 883000, keterangan: 'Kusen 230 x1 + 310 x2' }
+        };
         return hargaKusenExtraBesar[frameType] || { harga: 0, keterangan: 'Tipe kusen tidak valid' };
     }
         // Ukuran extraaaaa
     return { harga: 0, keterangan: 'Ukuran opening tidak valid' };
 }
     
-    // Harga daun pintu berdasarkan tipe dan ukuran
+ // Harga daun pintu berdasarkan tipe dan ukuran (Update April 2026)
     const hargaPintu = {
         'economy': {
-            '60x190': 796000,
-            '60x210': 893000,
-            '72x210': 943500,
-            '72x220': 1001000,
-            '72x240': 1109000
+            '60x190': 836000,
+            '60x210': 938000,
+            '72x210': 991000,
+            '72x220': 1051000,
+            '72x240': 1164500
         },
         'standard': {
-            '60x190': 943500,
-            '60x210': 1044000,
-            '72x210': 1116000,
-            '72x220': 1178000,
-            '72x240': 1292000,
-            '82x210': 1242000,
-            '82x220': 1306500,
-            '82x240': 1440000,
-            '82x280': 1706500,
-            '92x210': 1426000,
-            '92x220': 1490500,
-            '92x240': 1624000,
-            '92x280': 1912000
+            '60x190': 991000,
+            '60x210': 1096500,
+            '72x210': 1172000,
+            '72x220': 1237000,
+            '72x240': 1357000,
+            '82x210': 1304500,
+            '82x220': 1372000,
+            '82x240': 1512000,
+            '82x280': 1792000,
+            '92x210': 1497500,
+            '92x220': 1565000,
+            '92x240': 1705500,
+            '92x280': 2008000
         },
         'deluxe': {
-            '82x210': 1508000,
-            '82x220': 1580000,
-            '82x240': 1714000,
-            '82x280': 1980000,
-            '92x210': 1807500,
-            '92x220': 1872000,
-            '92x240': 2005000,
-            '92x280': 2304000
+            '82x210': 1583500,
+            '82x220': 1659000,
+            '82x240': 1800000,
+            '82x280': 2079000,
+            '92x210': 1898000,
+            '92x220': 1966000,
+            '92x240': 2105500,
+            '92x280': 2419500
         }
     };
     
@@ -229,195 +229,166 @@ function getHargaKusen(frameType, lebarOpening, tinggiOpening) {
         return { valid: true };
     }
     
-    // Fungsi untuk menghitung harga
-    function hitungHarga() {
-        // Sembunyikan pesan error dan hasil sebelumnya
-        document.getElementById('errorMessage').style.display = 'none';
-        document.getElementById('result').style.display = 'none';
-        document.getElementById('totalWithoutKusen').style.display = 'none';
-        
-        // Ambil nilai dari input
-        const doorType = document.getElementById('doorType').value;
-        const width = parseFloat(document.getElementById('width').value) || 0;
-        const height = parseFloat(document.getElementById('height').value) || 0;
-        const frameType = document.getElementById('frameType').value;
-        
-        // Validasi input dasar
-        if (width <= 0 || height <= 0) {
-            document.getElementById('errorMessage').innerHTML = 'Masukkan ukuran yang valid!';
-            document.getElementById('errorMessage').style.display = 'block';
-            return;
-        }
-        
-        // Validasi ukuran opening berdasarkan tipe pintu
-        const validasi = validasiUkuranOpening(doorType, width, height);
-        if (!validasi.valid) {
-            document.getElementById('errorMessage').innerHTML = validasi.message;
-            document.getElementById('errorMessage').style.display = 'block';
-            return;
-        }
-        
-        // Lanjutkan dengan perhitungan jika validasi berhasil
-        const doorLaminate = document.getElementById('doorLaminate').value;
-        const frameLaminate = document.getElementById('frameLaminate').value;
-        
-        // Hitung ukuran daun pintu setelah dikurangi kusen
-        let lebarDaun = width;
-        let tinggiDaun = height;
-        
-        if (frameType !== 'none') {
-            const pengurangan = penguranganKusen[frameType];
-            lebarDaun = width - pengurangan.lebar;
-            tinggiDaun = height - pengurangan.tinggi;
-            
-            // Tampilkan informasi perhitungan
-            document.getElementById('calculationInfo').innerHTML = `
-                <strong><center> ( CEK ULANG SAYA BUKAN NABI BOY) </strong></center><br>
-                <strong>Perhitungan Ukuran Daun Pintu :</strong><br>
-                Lebar Opening : ${width} cm - ${pengurangan.lebar} cm = <strong>${lebarDaun.toFixed(1)} cm</strong><br>
-                Tinggi Opening : ${height} cm - ${pengurangan.tinggi} cm = <strong>${tinggiDaun.toFixed(1)} cm</strong><br>
-                DAUN PINTU DI POTONG JADI = <strong>${lebarDaun.toFixed(1)} x ${tinggiDaun.toFixed(1)}</strong>
-            `;
-            document.getElementById('calculationInfo').style.display = 'block';
-        } else {
-            document.getElementById('calculationInfo').innerHTML = `
-                <strong>Perhitungan Ukuran Daun Pintu:</strong><br>
-                Tidak menggunakan kusen, menggunakan ukuran opening langsung<br>
-                Lebar: <strong>${lebarDaun.toFixed(1)} cm</strong>, Tinggi: <strong>${tinggiDaun.toFixed(1)} cm</strong>
-            `;
-            document.getElementById('calculationInfo').style.display = 'block';
-        }
-        
-        // Cari ukuran terdekat yang sesuai
-        const ukuranTerdekat = cariUkuranTerdekat(doorType, lebarDaun, tinggiDaun);
-        
-        if (!ukuranTerdekat) {
-            document.getElementById('errorMessage').innerHTML = 'Ukuran pintu tidak tersedia untuk tipe ini!';
-            document.getElementById('errorMessage').style.display = 'block';
-            return;
-        }
-        
-        // Tampilkan pesan jika menggunakan ukuran terdekat
-        const [lebarTerdekat, tinggiTerdekat] = ukuranTerdekat.split('x').map(Number);
-        document.getElementById('infoMessage').textContent = `PAKE DAUN PINTU : ${lebarTerdekat} x ${tinggiTerdekat} cm`;
-        document.getElementById('infoMessage').style.display = 'block';
-        
-        // Hitung harga daun pintu
-        const hargaDaunPintu = hargaPintu[doorType][ukuranTerdekat];
-        const labelDaunPintu = `Daun Pintu ${lebarTerdekat} x ${tinggiTerdekat}`;
-        
-        // Ongkos potong
-        const ongkosPotong = 45000;
-        
-        // Hitung harga kusen
-        let hargaKusenValue = 0;
-        let keteranganKusen = '';
-        if (frameType !== 'none') {
-            const kusenInfo = getHargaKusen(frameType, width, height);
-            hargaKusenValue = kusenInfo.harga;
-            keteranganKusen = kusenInfo.keterangan;
-        }
-        
-        // Hitung harga laminating daun pintu
-        let hargaLamDaun = 0;
-        let labelLamDaun = 'Laminating Daun Pintu: ';
-        
-        if (doorLaminate !== 'none') {
-            hargaLamDaun = hargaLaminate[doorLaminate];
-            const sisi = doorLaminate.includes('2') ? '2 Sisi' : '6 Sisi';
-            const warna = doorLaminate.includes('A') ? 'A' : 'B';
-            
-            // JIKA PINTU >240 MAKA LAMINATE KUSEN + SEKIAN
+   function hitungHarga() {
+    // 1. Reset tampilan awal
+    document.getElementById('errorMessage').style.display = 'none';
+    document.getElementById('result').style.display = 'none';
+    document.getElementById('infoMessage').style.display = 'none';
 
-            // JIKA PINTU >240 MAKA LAMINATE X2
-            // const tinggiInput = parseFloat(document.getElementById('height').value);
-            if (tinggiDaun > 240 ) {
-                hargaLamDaun = Math.round(hargaLamDaun * 1.5);
-                labelLamDaun = `Laminating Daun Pintu (${warna}) ${sisi} - ( >240 * 1.5 ) `;
-            } else {
-                labelLamDaun = `Laminating Daun Pintu (${warna}) ${sisi} `;
-            }
-          
-        }
-        
-        // Hitung harga laminating kusen
-        let hargaLamKusen = 0;
-        let labelLamKusen = 'Laminating Kusen ';
-        
-        if (frameLaminate !== 'none' && frameType !== 'none') {
-            if (height > 260) {
-                const hargaKhusus = {
-                    'A':543000,
-                    'B':445500
-                };
-                hargaLamKusen = hargaKhusus[frameLaminate];
-                labelLamKusen = `Laminating Kusen (${frameLaminate}) - (3 PCS)` ;
-            } else {
-                hargaLamKusen = hargaLaminate[frameLaminate];
-                labelLamKusen = `Laminating Kusen (${frameLaminate})`;
-            }
-
-        }
-        
-        // Hitung total tanpa kusen
-        const totalWithoutKusen = hargaDaunPintu + ongkosPotong ;
-        
-        // Hitung total unfinished
-        const totalUnfinished = totalWithoutKusen + hargaKusenValue;
-        
-        // Hitung total finished Daun Pintu
-        const totalFinishedWithoutKusen = totalWithoutKusen + hargaLamDaun;
-
-        // Hitung total finished Daun Pintu + Kusen
-        const totalFinished = totalUnfinished + hargaLamKusen + hargaLamDaun;
-
-        
-        // Tampilkan hasil
-        document.getElementById('labelDoorType').textContent = 'Tipe Pintu :';
-        document.getElementById('doorTypeName').textContent = document.getElementById('doorType').options[document.getElementById('doorType').selectedIndex].text;
-        
-        document.getElementById('labelDaunPintu').textContent = labelDaunPintu + ' :';
-        document.getElementById('hargaDaunPintu').textContent = formatRupiah(hargaDaunPintu);
-        document.getElementById('ongkosPotong').textContent = formatRupiah(ongkosPotong);
-        
-        if (frameType !== 'none') {
-            document.getElementById('labelFrameType').textContent = 'Tipe Kusen :';
-            document.getElementById('frameTypeName').textContent = `${frameType} (${keteranganKusen})`;
-            
-            document.getElementById('labelKusen').textContent = 'Kusen :';
-            document.getElementById('hargaKusen').textContent = formatRupiah(hargaKusenValue);
-        } else {
-            document.getElementById('labelFrameType').textContent = 'Kusen :';
-            document.getElementById('frameTypeName').textContent = 'Tidak Ada';
-            
-            document.getElementById('labelKusen').textContent = '';
-            document.getElementById('hargaKusen').textContent = '';
-        }
-        
-        document.getElementById('totalUnfinished').textContent = formatRupiah(totalUnfinished);
-        
-        document.getElementById('labelLamDaun').textContent = labelLamDaun + ':';
-        document.getElementById('hargaLamDaun').textContent = formatRupiah(hargaLamDaun);
-        
-        if (frameType !== 'none') {
-            document.getElementById('labelLamKusen').textContent = labelLamKusen + ':';
-            document.getElementById('hargaLamKusen').textContent = formatRupiah(hargaLamKusen);
-        } else {
-            document.getElementById('labelLamKusen').textContent = '';
-            document.getElementById('hargaLamKusen').textContent = '';
-        }
-        
-        // Tampilkan Total Tanpa Kusen
-        document.getElementById('totalWithoutKusen').textContent = formatRupiah(totalWithoutKusen);
-        document.getElementById('totalWithoutKusen').style.display = 'flex';
-        
-        document.getElementById('totalFinished').textContent = formatRupiah(totalFinished);
-        document.getElementById('totalFinishedWithoutKusen').textContent = formatRupiah(totalFinishedWithoutKusen);
-        
-        // Tampilkan hasil
-        document.getElementById('result').style.display = 'block';
-    }
+    // 2. Ambil nilai Input
+    const doorType = document.getElementById('doorType').value;
+    const width = parseFloat(document.getElementById('width').value) || 0;
+    const height = parseFloat(document.getElementById('height').value) || 0;
+    const frameType = document.getElementById('frameType').value;
+    const doorLaminate = document.getElementById('doorLaminate').value;
+    const frameLaminate = document.getElementById('frameLaminate').value;
     
+    // Input Add-ons & Diskon
+    const addonVerstek = document.getElementById('addonVerstek');
+    const addonAlumini = document.getElementById('addonAlumini');
+    const discPersen = parseFloat(document.getElementById('discountPersen').value) || 0;
+    const multiplier = (100 - discPersen) / 100;
+
+    // 3. Validasi Ukuran
+    if (width <= 0 || height <= 0) {
+        document.getElementById('errorMessage').innerHTML = 'Masukkan ukuran yang valid!';
+        document.getElementById('errorMessage').style.display = 'block';
+        return;
+    }
+
+    const validasi = validasiUkuranOpening(doorType, width, height);
+    if (!validasi.valid) {
+        document.getElementById('errorMessage').innerHTML = validasi.message;
+        document.getElementById('errorMessage').style.display = 'block';
+        return;
+    }
+
+    // 4. Hitung Ukuran Daun & Cari Ukuran Terdekat
+    let lebarDaun = width;
+    let tinggiDaun = height;
+    let infoHTML = '';
+
+    if (frameType !== 'none') {
+        const pengurangan = penguranganKusen[frameType];
+        lebarDaun = width - pengurangan.lebar;
+        tinggiDaun = height - pengurangan.tinggi;
+        infoHTML = `<strong><center>( CEK ULANG SAYA BUKAN NABI BOY )</center></strong><br>
+                    Lebar Opening : ${width} - ${pengurangan.lebar} = <strong>${lebarDaun.toFixed(1)} cm</strong><br>
+                    Tinggi Opening : ${height} - ${pengurangan.tinggi} = <strong>${tinggiDaun.toFixed(1)} cm</strong>`;
+    } else {
+        infoHTML = `<strong>Perhitungan Daun Pintu Saja:</strong><br>Ukuran Aktual: ${width} x ${height} cm`;
+    }
+
+    const ukuranTerdekatString = cariUkuranTerdekat(doorType, lebarDaun, tinggiDaun);
+    const [lebarTerdekat, tinggiTerdekat] = ukuranTerdekatString.split('x').map(Number);
+    document.getElementById('infoMessage').textContent = `PAKE DAUN PINTU : ${lebarTerdekat} x ${tinggiTerdekat} cm`;
+    document.getElementById('infoMessage').style.display = 'block';
+
+    // 5. Kalkulasi Harga Dasar & Jasa (NETT)
+    const hargaDaunPintuAsli = hargaPintu[doorType][ukuranTerdekatString];
+    const ongkosPotong = 45000;
+    
+    let hargaKusenAsli = 0;
+    let keteranganKusen = '';
+    if (frameType !== 'none') {
+        const kusenInfo = getHargaKusen(frameType, width, height);
+        hargaKusenAsli = kusenInfo.harga;
+        keteranganKusen = kusenInfo.keterangan;
+    }
+
+    // Hitung Add-ons (NETT)
+    let valVerstek = (addonVerstek && addonVerstek.checked) ? parseFloat(addonVerstek.value) : 0;
+    let valAlumini = (addonAlumini && addonAlumini.checked) ? parseFloat(addonAlumini.value) : 0;
+    const totalAddonsNETT = valVerstek + valAlumini;
+
+    // Hitung Laminating (NETT)
+    let hargaLamDaun = 0;
+    if (doorLaminate !== 'none') {
+        hargaLamDaun = hargaLaminate[doorLaminate];
+        if (tinggiDaun > 240) hargaLamDaun = Math.round(hargaLamDaun * 1.5);
+    }
+
+    let hargaLamKusen = 0;
+    if (frameLaminate !== 'none' && frameType !== 'none') {
+        if (height > 260) {
+            const hargaKhusus = { 'A': 543000, 'B': 445500 };
+            hargaLamKusen = hargaKhusus[frameLaminate];
+        } else {
+            hargaLamKusen = hargaLaminate[frameLaminate];
+        }
+    }
+
+    // 6. TERAPKAN DISKON (Hanya pada Daun & Kusen)
+    const hargaDaunFinal = hargaDaunPintuAsli * multiplier;
+    const hargaKusenFinal = hargaKusenAsli * multiplier;
+
+    // 7. HITUNG TOTAL AKHIR
+    const totalWithoutKusenUnfinished = hargaDaunFinal + ongkosPotong + totalAddonsNETT;
+    const totalWithKusenUnfinished = totalWithoutKusenUnfinished + hargaKusenFinal;
+    
+    const totalWithoutKusenFinished = totalWithoutKusenUnfinished + hargaLamDaun;
+    const totalWithKusenFinished = totalWithKusenUnfinished + hargaLamDaun + hargaLamKusen;
+
+    // 8. TAMPILKAN KE TABEL RINCIAN
+    document.getElementById('doorTypeName').textContent = document.getElementById('doorType').options[document.getElementById('doorType').selectedIndex].text;
+    
+    // Rincian Daun (Tampilkan coret jika diskon)
+    const labelDaun = `Daun Pintu ${lebarTerdekat} x ${tinggiTerdekat} :`;
+    document.getElementById('labelDaunPintu').textContent = labelDaun;
+    if (discPersen > 0) {
+        document.getElementById('hargaDaunPintu').innerHTML = `<del>${formatRupiah(hargaDaunPintuAsli)}</del> <span style="color:red">(-${discPersen}%)</span><br><strong>${formatRupiah(hargaDaunFinal)}</strong>`;
+    } else {
+        document.getElementById('hargaDaunPintu').textContent = formatRupiah(hargaDaunPintuAsli);
+    }
+
+    document.getElementById('ongkosPotong').textContent = formatRupiah(ongkosPotong);
+
+    // Rincian Add-ons (Per Item)
+    const rowVerstek = document.getElementById('rowVerstek');
+    if (valVerstek > 0) {
+        rowVerstek.style.display = 'flex';
+        document.getElementById('hargaVerstek').textContent = formatRupiah(valVerstek);
+    } else { rowVerstek.style.display = 'none'; }
+
+    const rowAlumini = document.getElementById('rowAlumini');
+    if (valAlumini > 0) {
+        rowAlumini.style.display = 'flex';
+        document.getElementById('hargaAlumini').textContent = formatRupiah(valAlumini);
+    } else { rowAlumini.style.display = 'none'; }
+
+    // Rincian Kusen
+    if (frameType !== 'none') {
+        document.getElementById('frameTypeName').textContent = `${frameType} (${keteranganKusen})`;
+        if (discPersen > 0) {
+            document.getElementById('hargaKusen').innerHTML = `<del>${formatRupiah(hargaKusenAsli)}</del> <span style="color:red">(-${discPersen}%)</span><br><strong>${formatRupiah(hargaKusenFinal)}</strong>`;
+        } else {
+            document.getElementById('hargaKusen').textContent = formatRupiah(hargaKusenAsli);
+        }
+        document.getElementById('totalUnfinished').parentElement.style.display = 'flex';
+        document.getElementById('totalFinished').parentElement.style.display = 'flex';
+    } else {
+        document.getElementById('frameTypeName').textContent = 'Tidak Ada';
+        document.getElementById('hargaKusen').textContent = '';
+        document.getElementById('totalUnfinished').parentElement.style.display = 'none';
+        document.getElementById('totalFinished').parentElement.style.display = 'none';
+    }
+
+    // Rincian Laminating
+    document.getElementById('hargaLamDaun').textContent = formatRupiah(hargaLamDaun);
+    document.getElementById('hargaLamKusen').textContent = (frameType !== 'none') ? formatRupiah(hargaLamKusen) : '';
+
+    // TOTAL RESULT AKHIR
+    document.getElementById('totalWithoutKusen').textContent = formatRupiah(totalWithoutKusenUnfinished);
+    document.getElementById('totalUnfinished').textContent = formatRupiah(totalWithKusenUnfinished);
+    document.getElementById('totalFinishedWithoutKusen').textContent = formatRupiah(totalWithoutKusenFinished);
+    document.getElementById('totalFinished').textContent = formatRupiah(totalWithKusenFinished);
+
+    document.getElementById('calculationInfo').innerHTML = infoHTML;
+    document.getElementById('calculationInfo').style.display = 'block';
+    document.getElementById('result').style.display = 'block';
+}
+    
+
     // Tambahkan event listener untuk tombol enter
     document.addEventListener('DOMContentLoaded', function() {
         const inputs = [
@@ -521,5 +492,23 @@ function setupThemeToggle() {
             document.documentElement.setAttribute('data-theme', 'light');
             localStorage.setItem('theme', 'light');
         }
+    });
+}
+
+
+function resetForm() {
+    document.querySelectorAll('input').forEach(input => input.value = '');
+    document.querySelectorAll('select').forEach(select => select.selectedIndex = 0);
+    document.getElementById('result').style.display = 'none';
+    document.getElementById('calculationInfo').style.display = 'none';
+    document.getElementById('infoMessage').style.display = 'none';
+    document.getElementById('errorMessage').style.display = 'none';
+}
+
+function copyToClipboard() {
+    const resultDiv = document.getElementById('result');
+    const text = resultDiv.innerText;
+    navigator.clipboard.writeText(text).then(() => {
+        alert("Rincian harga berhasil disalin!");
     });
 }
