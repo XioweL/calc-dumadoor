@@ -273,8 +273,11 @@ const hargaKusenExtraBesar = {
         lebarDaun = width - pengurangan.lebar;
         tinggiDaun = height - pengurangan.tinggi;
         infoHTML = `<strong><center>( CEK ULANG SAYA BUKAN NABI BOY )</center></strong><br>
+                    <strong>Perhitungan Ukuran Daun Pintu :</strong><br>
                     Lebar Opening : ${width} - ${pengurangan.lebar} = <strong>${lebarDaun.toFixed(1)} cm</strong><br>
-                    Tinggi Opening : ${height} - ${pengurangan.tinggi} = <strong>${tinggiDaun.toFixed(1)} cm</strong>`;
+                    Tinggi Opening : ${height} - ${pengurangan.tinggi} = <strong>${tinggiDaun.toFixed(1)} cm</strong><br>
+                    DAUN PINTU DI POTONG JADI = <strong>${lebarDaun.toFixed(1)} x ${tinggiDaun.toFixed(1)}</strong>`
+                    ;
     } else {
         infoHTML = `<strong>Perhitungan Daun Pintu Saja:</strong><br>Ukuran Aktual: ${width} x ${height} cm`;
     }
