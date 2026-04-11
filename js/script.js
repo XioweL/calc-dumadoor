@@ -506,6 +506,7 @@ function resetForm() {
     document.getElementById('calculationInfo').style.display = 'none';
     document.getElementById('infoMessage').style.display = 'none';
     document.getElementById('errorMessage').style.display = 'none';
+    document.getElementById('hitungApa').value = 'openAN';
 }
 
 function copyToClipboard() {
