@@ -1,11 +1,8 @@
-    // Harga laminating
+// Harga laminating
     const hargaLaminate = {
-        'A2': 477000,
-        'A6': 557000,
-        'B2': 392000,
-        'B6': 477000,
-        'A': 362000,
-        'B': 297000
+        '2s': 525000,
+        '6s': 612500,
+        'LK': 400000
     };
     
     // Pengurangan ukuran berdasarkan tipe kusen (lebar, tinggi)
@@ -246,6 +243,10 @@ const hargaKusenExtraBesar = {
     // Input Add-ons & Diskon
     const addonVerstek = document.getElementById('addonVerstek');
     const addonAlumini = document.getElementById('addonAlumini');
+    const addonRouterS = document.getElementById('addonRouterS');
+    const addonRouterC = document.getElementById('addonRouterC');
+    const addonLubangS = document.getElementById('addonLubangS');
+    const addonLubangC = document.getElementById('addonLubangC');
     const discPersen = parseFloat(document.getElementById('discountPersen').value) || 0;
     const multiplier = (100 - discPersen) / 100;
 
@@ -302,7 +303,11 @@ const hargaKusenExtraBesar = {
     // Hitung Add-ons (NETT)
     let valVerstek = (addonVerstek && addonVerstek.checked) ? parseFloat(addonVerstek.value) : 0;
     let valAlumini = (addonAlumini && addonAlumini.checked) ? parseFloat(addonAlumini.value) : 0;
-    const totalAddonsNETT = valVerstek + valAlumini;
+    let valRouterS = (addonRouterS && addonRouterS.checked) ? parseFloat(addonRouterS.value) : 0;
+    let valRouterC = (addonRouterC && addonRouterC.checked) ? parseFloat(addonRouterC.value) : 0;
+    let valLubangS = (addonLubangS && addonLubangS.checked) ? parseFloat(addonLubangS.value) : 0;
+    let valLubangC = (addonLubangC && addonLubangC.checked) ? parseFloat(addonLubangC.value) : 0;
+    const totalAddonsNETT = valVerstek + valAlumini + valRouterS + valRouterC + valLubangC + valLubangS;
 
     // Hitung Laminating (NETT)
     let hargaLamDaun = 0;
@@ -314,7 +319,7 @@ const hargaKusenExtraBesar = {
     let hargaLamKusen = 0;
     if (frameLaminate !== 'none' && frameType !== 'none') {
         if (height > 260) {
-            const hargaKhusus = { 'A': 543000, 'B': 445500 };
+            const hargaKhusus = { 'LK': 600000 };
             hargaLamKusen = hargaKhusus[frameLaminate];
         } else {
             hargaLamKusen = hargaLaminate[frameLaminate];
@@ -359,6 +364,30 @@ const hargaKusenExtraBesar = {
         document.getElementById('hargaAlumini').textContent = formatRupiah(valAlumini);
     } else { rowAlumini.style.display = 'none'; }
 
+    const rowRouterS = document.getElementById('rowRouterS');
+    if (valRouterS > 0) {
+        rowRouterS.style.display = 'flex';
+        document.getElementById('hargaRouterS').textContent = formatRupiah(valRouterS);
+    } else { rowRouterS.style.display = 'none'; }
+
+    const rowRouterC = document.getElementById('rowRouterC');
+    if (valRouterC > 0) {
+        rowRouterC.style.display = 'flex';
+        document.getElementById('hargaRouterC').textContent = formatRupiah(valRouterC);
+    } else { rowRouterC.style.display = 'none'; }  
+
+    const rowLubangS = document.getElementById('rowLubangS');     
+    if (valLubangS > 0) {
+        rowLubangS.style.display = 'flex';
+        document.getElementById('hargaLubangS').textContent = formatRupiah(valLubangS);
+    } else { rowLubangS.style.display = 'none'; }   
+
+    const rowLubangC = document.getElementById('rowLubangC');     
+    if (valLubangC > 0) {
+        rowLubangC.style.display = 'flex';
+        document.getElementById('hargaLubangC').textContent = formatRupiah(valLubangC);
+    } else { rowLubangC.style.display = 'none'; }      
+
     // Rincian Kusen
     if (frameType !== 'none') {
         document.getElementById('frameTypeName').textContent = `${frameType} (${keteranganKusen})`;
@@ -394,6 +423,7 @@ const hargaKusenExtraBesar = {
 
     // Tambahkan event listener untuk tombol enter
     document.addEventListener('DOMContentLoaded', function() {
+        setupThemeToggle();
         const inputs = [
             document.getElementById('doorType'),
             document.getElementById('width'),
@@ -401,7 +431,13 @@ const hargaKusenExtraBesar = {
             document.getElementById('frameType'),
             document.getElementById('doorLaminate'),
             document.getElementById('frameLaminate'),
-            setupThemeToggle()
+            document.getElementById('discountPersen'),
+            document.getElementById('addonVerstek'),
+            document.getElementById('addonRouterS'),
+            document.getElementById('addonRouterC'),
+            document.getElementById('addonLubangS'),
+            document.getElementById('addonLubangC'),
+            document.getElementById('addonAlumini')
         ];
         
         inputs.forEach(input => {
@@ -422,10 +458,15 @@ function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
     const mainContent = document.getElementById('mainContent');
+    const menuBtn = document.querySelector('.floating-menu-btn');
     
     sidebarVisible = !sidebarVisible;
     sidebar.classList.toggle('active');
     overlay.classList.toggle('active');
+
+    if (menuBtn) {
+        menuBtn.style.display = sidebarVisible ? 'none' : 'flex';
+    }
     
     if (window.innerWidth < 768) {
         mainContent.classList.toggle('active');
@@ -510,8 +551,33 @@ function resetForm() {
 }
 
 function copyToClipboard() {
-    const resultDiv = document.getElementById('result');
-    const text = resultDiv.innerText;
+    const doorTypeName = document.getElementById('doorTypeName').textContent;
+    const frameTypeName = document.getElementById('frameTypeName').textContent;
+
+    const totalWithoutKusen = document.getElementById('totalWithoutKusen').textContent;
+    const totalUnfinished = document.getElementById('totalUnfinished').textContent;
+    const totalFinishedWithoutKusen = document.getElementById('totalFinishedWithoutKusen').textContent;
+    const totalFinished = document.getElementById('totalFinished').textContent;
+
+    const frameType = document.getElementById('frameType').value;
+    const garis = '➖➖➖➖➖➖➖➖➖➖';
+
+    let text = '';
+    text += `Tipe Pintu : ${doorTypeName}\n`;
+    text += `Tipe Kusen : ${frameTypeName}\n`;
+    text += `\n${garis}\n`;
+    text += `UNFINISHED\n`;
+    text += `🔹 Daun Pintu         : ${totalWithoutKusen}\n`;
+    if (frameType !== 'none') {
+        text += `🔹 Daun Pintu + Kusen : ${totalUnfinished}\n`;
+    }
+    text += `\nFINISHED\n`;
+    text += `🔸 Daun Pintu         : ${totalFinishedWithoutKusen}\n`;
+    if (frameType !== 'none') {
+        text += `🔸 Daun Pintu + Kusen : ${totalFinished}\n`;
+    }
+    text += `${garis}`;
+
     navigator.clipboard.writeText(text).then(() => {
         alert("Rincian harga berhasil disalin!");
     });

@@ -86,8 +86,8 @@
                 </div>
                 
                 <div class="app-version">
-                    <span>v2.3.4</span><br>
-                    <span>© 2026 <a href="https://www.instagram.com/xiowel/" target="_blank" rel="noopener noreferrer">XioweL</a>. All Rights Reserved.</span>
+                    <span>v2.4.0</span><br>
+                    <span>© 2026 <a href="https://github.com/xiowel" target="_blank" rel="noopener noreferrer">XioweL</a>. All Rights Reserved.</span>
                 </div>
             </div>
         </div>
@@ -102,12 +102,7 @@
         <div id="calculator-section" class="content-section active">
             <div class="container">
     <div class="logo-container" style="display: grid; place-items: center;">
-<dotlottie-wc
-  src="https://lottie.host/af7258a5-f642-49a2-8491-2bead782abf9/d7fligqURM.lottie"
-  style="width: 300px;height: 300px"
-  autoplay
-  loop
-></dotlottie-wc>
+<img src="images/kicau mania.webp" style="width: 300px; height: 300px;" alt="header">
     </div>
                 <p class="description">
                     HANYA UNTUK ESTIMASI HARGA JANGAN DI JADIKAN PATOKAN, CEK KEMBALI !!
@@ -164,7 +159,32 @@
                 <span class="checkbox-text">Ongkos Verstek (Rp 30.000)</span>
             </label>
         </div>
+
         <div class="addon-item">
+            <label class="modern-checkbox">
+                <input type="checkbox" id="addonRouterS" value="35000">
+                <span class="checkbox-text">Router Simple (Rp 35.000)</span>
+            </label>
+        </div>
+            <div class="addon-item">
+            <label class="modern-checkbox">
+                <input type="checkbox" id="addonRouterC" value="40000">
+                <span class="checkbox-text">Router Complex (Rp 40.000)</span>
+            </label>
+        </div>
+            <div class="addon-item">
+            <label class="modern-checkbox">
+                <input type="checkbox" id="addonLubangS" value="30000">
+                <span class="checkbox-text">Lubang Handle Simple (Rp 30.000)</span>
+            </label>
+        </div>
+            <div class="addon-item">
+            <label class="modern-checkbox">
+                <input type="checkbox" id="addonLubangC" value="50000">
+                <span class="checkbox-text">Lubang Handle Complex (Rp 50.000)</span>
+            </label>
+        </div>
+                <div class="addon-item">
             <label class="modern-checkbox">
                 <input type="checkbox" id="addonAlumini" value="180000">
                 <span class="checkbox-text">Aluminium Strip (Rp 180.000)</span>
@@ -235,10 +255,8 @@ const labelTinggi = document.getElementById('labelTinggi');
                             <label for="doorLaminate" data-hint="PILIH JENIS LAMINATING">Choose</label>
                             <select id="doorLaminate">
                                 <option value="none">Tidak Ada</option>
-                                <option value="A2">Warna A - 2 Sisi (Rp 477.000)</option>
-                                <option value="A6">Warna A - 6 Sisi (Rp 557.000)</option>
-                                <option value="B2">Warna B - 2 Sisi (Rp 392.000)</option>
-                                <option value="B6">Warna B - 6 Sisi (Rp 477.000)</option>
+                                <option value="2s">2 Sisi (Rp 525.000)</option>
+                                <option value="6s">6 Sisi (Rp 612.500)</option>
                             </select>
                         </div>
                     </div>
@@ -249,8 +267,7 @@ const labelTinggi = document.getElementById('labelTinggi');
                             <label for="frameLaminate" data-hint="PILIH JENIS LAMINATING">Choose</label>
                             <select id="frameLaminate">
                                 <option value="none">Tidak Ada</option>
-                                <option value="A">Warna A (Rp 362.000)</option>
-                                <option value="B">Warna B (Rp 297.000)</option>
+                                <option value="LK">Kusen (Rp 200.000)</option>
                             </select>
                         </div>
                     </div>
@@ -289,7 +306,22 @@ const labelTinggi = document.getElementById('labelTinggi');
     <span>Aluminium Strip :</span>
     <span id="hargaAlumini" class="price">Rp 0</span>
 </div>
-
+<div class="result-item" id="rowRouterS" style="display: none;">
+    <span>Router Simple :</span>
+    <span id="hargaRouterS" class="price">Rp 0</span>
+</div>
+<div class="result-item" id="rowRouterC" style="display: none;">
+    <span>Router Complex :</span>
+    <span id="hargaRouterC" class="price">Rp 0</span>
+</div>
+<div class="result-item" id="rowLubangS" style="display: none;">
+    <span>Lubang Handle Simple :</span>
+    <span id="hargaLubangS" class="price">Rp 0</span>
+</div>
+<div class="result-item" id="rowLubangC" style="display: none;">
+    <span>Lubang Handle Complex :</span>
+    <span id="hargaLubangC" class="price">Rp 0</span>
+</div>
     <div class="result-item">
         <span id="labelFrameType">Tipe Kusen :</span>
         <span id="frameTypeName" class="price">-</span>
@@ -343,7 +375,7 @@ const labelTinggi = document.getElementById('labelTinggi');
     <button onclick="resetForm()" class="btn-reset">Hitung Ulang</button>
 </div>
                 
-                <p class="note"><span>© 2026 <a href="https://www.instagram.com/xiowel/" target="_blank" rel="noopener noreferrer">XioweL</a>. All Rights Reserved.</span></p>
+                <p class="note"><span>© 2026 <a href="https://github.com/xiowel" target="_blank" rel="noopener noreferrer">XioweL</a>. All Rights Reserved.</span></p>
             </div>
         </div>
 
