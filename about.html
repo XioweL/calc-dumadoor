@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About CALDU</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Work+Sans:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #0a3530;
+            --accent: #d3ab83;
+            --dark: #1a1a1a;
+            --light: #f5f7f9;
+            --border: #2a2a2a;
+        }
+        
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0 60px;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 60px;
+        }
+        
+        header h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 48px;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            color: #888;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .content {
+            margin-bottom: 60px;
+        }
+        
+        .content h2 {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent);
+            font-size: 24px;
+            margin-bottom: 20px;
+            margin-top: 40px;
+        }
+        
+        .content p {
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+        
+        .content ul {
+            color: #aaa;
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .content li {
+            margin-bottom: 10px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--accent);
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid var(--accent);
+            transition: all 0.3s;
+        }
+        
+        .back-btn:hover {
+            background: var(--accent);
+            color: var(--dark);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 2px solid var(--border);
+            margin-top: 80px;
+        }
+        
+        footer p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: var(--light);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CALDU</h1>
+            <p>Calculator Duma Wpc</p>
+        </header>
+        
+        <div class="content">
+            <h2>Tentang CALDU</h2>
+            <p>CALDU (Calculator Duma) adalah platform estimasi harga yang dirancang khusus untuk mempermudah perhitungan kebutuhan produk Duma Wpc, khususnya Deck & Door, tidak menutup kemungkinan kedepan update lagi perhitungan lainnya.</p>
+            
+            <h2>Fitur Tersedia</h2>
+            <ul>
+                <li><strong>Duma Door Calculator</strong> — Kalkulasi harga pintu, kusen, finishing (laminating), add-ons (verstek, router, lubang kunci), dan diskon.</li>
+                <li><strong>Duma Deck Calculator</strong> — Hitung kebutuhan deck, deckbase, joint clip, edge clip berdasarkan luas area dan arah pasang.</li>
+                <li><strong>Salin Kebutuhan</strong> — Export hasil perhitungan ke WhatsApp dengan format rapi.</li>
+                <li><strong>Dark Mode</strong> — Tampilan gelap untuk kenyamanan mata.</li>
+            </ul>
+            
+            <h2>Disclaimer</h2>
+            <p>Semua perhitungan di platform ini hanya untuk <strong>estimasi</strong>. Harap verifikasi kembali sebelum digunakan sebagai acuan resmi.</p>
+            
+            <h2>Feedback</h2>
+            <p>Website ini masih terus dikembangkan. Jika menemukan kesalahan perhitungan atau bug, silakan hubungi Ferdi 😝.</p>
+            
+            <br><br>
+            <a href="index.html" class="back-btn">← Kembali ke Beranda</a>
+        </div>
+        
+        <footer>
+            <p>© 2026 <a href="https://github.com/xiowel" target="_blank" rel="noopener noreferrer">XioweL</a>. All Rights Reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

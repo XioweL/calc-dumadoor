@@ -2,439 +2,312 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CALDU -  CALCULATOR DUMA</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CALDU - Calculator Duma Door & Deck</title>
     <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Work+Sans:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #0a3530;
+            --accent: #d3ab83;
+            --dark: #1a1a1a;
+            --light: #f5f7f9;
+            --border: #2a2a2a;
+        }
+        
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Animated Background Grid */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            z-index: 0;
+            animation: gridMove 20s linear infinite;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 20px;
+        }
+        
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0 20px;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 32px;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            border: 2px solid var(--accent);
+            object-fit: contain;
+            background: var(--primary);
+        }
+        
+        .logo-text h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 800;
+            font-size: 32px;
+            color: var(--accent);
+            letter-spacing: 2px;
+        }
+        
+        .logo-text p {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 2px;
+        }
+        
+        .status-badge {
+            background: var(--primary);
+            color: var(--accent);
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid var(--accent);
+        }
+        
+        /* Hero */
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .hero h2 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(32px, 6vw, 64px);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .card {
+            background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(211, 171, 131, 0.1);
+        }
+        
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .card h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--accent);
+        }
+        
+        .card p {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .card-arrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: var(--accent);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover .card-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 16px 0;
+            border-top: 2px solid var(--border);
+            margin-top: 30px;
+        }
+        
+        footer p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        footer a:hover {
+            color: var(--light);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Floating Menu Button -->
-    <button class="floating-menu-btn" onclick="toggleSidebar()">
-        <span class="menu-icon">☰</span>
-        <span class="menu-text">Menu</span>
-    </button>
-
-    <!-- Modern Sidebar -->
-    <div class="modern-sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <div class="logo-mini">
-                <img src="images/logo.png" alt="Duma Door" class="sidebar-logo">
-            </div>
-            <div class="sidebar-title">
-                <h3>CALDU</h3>
-                <span class="sidebar-subtitle">Website Estimator Duma</span>
-            </div>
-            <button class="sidebar-close" onclick="toggleSidebar()">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2"/>
-                </svg>
-            </button>
-        </div>
-
-        <div class="sidebar-content">
-            <nav class="sidebar-nav">
-                <ul class="nav-list">
-                    <li class="nav-item active">
-                        <a href="#calculator" class="nav-link" onclick="showSection('calculator')">
-                            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M9 7h6m-3 0v10m-8 4h16a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" stroke="currentColor" stroke-width="2"/>
-                            </svg>
-                            <span class="nav-text">Calc Duma Door</span>
-                        </a>
-                    </li>
-                                        <li class="nav-item">
-                        <a href="#deck" class="nav-link" onclick="showSection('deck')">
-                            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2"/>
-                            </svg>
-                            <span class="nav-text">Calc Duma Deck ( SOON )</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#about" class="nav-link" onclick="showSection('about')">
-                            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2"/>
-                            </svg>
-                            <span class="nav-text">About</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#news" class="nav-link" onclick="showSection('news')">
-                            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m4 13a2 2 0 01-2-2V7m4 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9m0 0v4m0-4a2 2 0 012-2h2a2 2 0 012 2M9 6v4m0 4h.01" stroke="currentColor" stroke-width="2"/>
-                            </svg>
-                            <span class="nav-text">What's New</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-
-            <div class="sidebar-footer">
-                <div class="theme-section">
-                    <div class="theme-info">
-                        <svg class="theme-icon" width="18" height="18" viewBox="0 0 24 24" fill="none">
-                            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                        <span>Dark Mode</span>
-                    </div>
-                    <label class="modern-switch">
-                        <input type="checkbox" id="themeToggle">
-                        <span class="switch-slider"></span>
-                    </label>
-                </div>
-                
-                <div class="app-version">
-                    <span>v2.4.0</span><br>
-                    <span>© 2026 <a href="https://github.com/xiowel" target="_blank" rel="noopener noreferrer">XioweL</a>. All Rights Reserved.</span>
+    <div class="grid-bg"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo-section">
+                <img src="images/kicau mania.webp" alt="Duma Door" class="logo-img">
+                <div class="logo-text">
+                    <h1>CALDU</h1>
+                    <p>Estimator Tools</p>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Overlay -->
-    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
-
-    <!-- Content Sections -->
-    <div class="main-content" id="mainContent">
-        <!-- Calculator Section -->
-        <div id="calculator-section" class="content-section active">
-            <div class="container">
-    <div class="logo-container" style="display: grid; place-items: center;">
-<img src="images/kicau mania.webp" style="width: 300px; height: 300px;" alt="header">
-    </div>
-                <p class="description">
-                    HANYA UNTUK ESTIMASI HARGA JANGAN DI JADIKAN PATOKAN, CEK KEMBALI !!
-                </p>
-                
-                                 <div class="form-group">
-                    <label for="hitungApa" data-hint="MAU UKUR APA ?">Mau Hitung Apa ?</label>
-                    <select id="hitungApa">
-                        <option value="daunP">Daun Pintu</option>
-                        <option value="openAN" selected>Openingan</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="doorType" data-hint="PILIH TYPE PINTU YANG DIINGINKAN">Tipe Pintu:</label>
-                    <select id="doorType">
-                        <option value="economy">Economy</option>
-                        <option value="standard" selected>Standard</option>
-                        <option value="deluxe">Deluxe</option>
-                    </select>
-                </div>
-                
-
-<div class="form-group">
-    <label for="width" id="labelLebar" data-hint="">Lebar Opening (cm):</label>
-    <input type="number" id="width" placeholder="Contoh: 82 OR 86.5" ... >
-</div>
-
-<div class="form-group">
-    <label for="height" id="labelTinggi" data-hint="TAMBAH 2.5 cm...">Tinggi Opening (cm):</label>
-    <input type="number" id="height" placeholder="Contoh: 220 OR 222.5" ... >
-</div>
-                
-                <div class="form-group">
-                    <label for="frameType" data-hint="PILIH JENIS KUSEN, SESUAIKAN DENGAN KEBUTUHAN">Tipe Kusen:</label>
-                    <select id="frameType">
-                        <option value="none">Tidak Ada</option>
-                        <option value="DJD">DJD</option>
-                        <option value="DJE">DJE</option>
-                        <option value="DJA">DJA</option>
-                        <option value="DJC">DJC</option>
-                        <option value="DJF">DJF</option>
-                        <option value="DJG">DJG</option>
-                    </select>
-                </div>
-
-                
-<div class="options-grid">
-    <div class="option-box">
-        <div class="option-title">Add-ons (Opsional)</div>
-        <div class="addon-item">
-            <label class="modern-checkbox">
-                <input type="checkbox" id="addonVerstek" value="30000">
-                <span class="checkbox-text">Ongkos Verstek (Rp 30.000)</span>
-            </label>
-        </div>
-
-        <div class="addon-item">
-            <label class="modern-checkbox">
-                <input type="checkbox" id="addonRouterS" value="35000">
-                <span class="checkbox-text">Router Simple (Rp 35.000)</span>
-            </label>
-        </div>
-            <div class="addon-item">
-            <label class="modern-checkbox">
-                <input type="checkbox" id="addonRouterC" value="40000">
-                <span class="checkbox-text">Router Complex (Rp 40.000)</span>
-            </label>
-        </div>
-            <div class="addon-item">
-            <label class="modern-checkbox">
-                <input type="checkbox" id="addonLubangS" value="30000">
-                <span class="checkbox-text">Lubang Handle Simple (Rp 30.000)</span>
-            </label>
-        </div>
-            <div class="addon-item">
-            <label class="modern-checkbox">
-                <input type="checkbox" id="addonLubangC" value="50000">
-                <span class="checkbox-text">Lubang Handle Complex (Rp 50.000)</span>
-            </label>
-        </div>
-                <div class="addon-item">
-            <label class="modern-checkbox">
-                <input type="checkbox" id="addonAlumini" value="180000">
-                <span class="checkbox-text">Aluminium Strip (Rp 180.000)</span>
-            </label>
-        </div>
-    </div>
-
-    <div class="option-box">
-        <div class="option-title">Diskon ( % )</div>
-        <div class="input-group" style="margin-top: 10px;">
-            <input type="number" id="discountPersen" placeholder="0" min="0" max="100" 
-                   style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
-            <small style="color: #666; font-style: italic;">*Hanya memotong harga Daun & Kusen</small>
-        </div>
-    </div>
-</div>
-
-
-
-    <!-- Event listener select tipe perhitungan -->
-<script>
-document.addEventListener('DOMContentLoaded', (event) => {
-    // 1. Ambil kedua elemen dropdown
-    const productTypeSelect = document.getElementById('hitungApa');
-    const frameTypeSelect = document.getElementById('frameType');
-    // Ambil elemen labelnya dulu
-const labelLebar = document.getElementById('labelLebar');
-const labelTinggi = document.getElementById('labelTinggi');
-
-    // 2. Tambahkan Event Listener ke dropdown 'Jenis Produk'
-    productTypeSelect.addEventListener('change', function() {
-        // Ambil nilai yang baru saja dipilih
-        const selectedProductType = this.value;
-
-        // 3. Terapkan logika IF
-        if (selectedProductType === 'openAN') {
-            // IF productType ke Openingan, set Tipe Kusen ke DJD
-            frameTypeSelect.value = 'DJD';
-            console.log("Pilihan: Openingan. Tipe Kusen diatur ke DJD.");
+            <div class="status-badge">● Online</div>
+        </header>
+        
+        <section class="hero">
+            <h2>Hitung Cepat,<br>Kerja Efisien</h2>
+            <p>Platform estimasi harga untuk produk Duma Door & Deck. Pilih kalkulator sesuai kebutuhan Anda.</p>
+        </section>
+        
+        <section class="cards-grid">
+            <a href="door.html" class="card">
+                <div class="card-icon">🚪</div>
+                <h3>Duma Door</h3>
+                <p>Kalkulasi harga pintu, kusen, finishing, dan add-ons dengan estimasi akurat.</p>
+                <span class="card-arrow">→ Mulai Hitung</span>
+            </a>
             
-            labelLebar.innerText = "Lebar Opening (cm):";
-            labelTinggi.innerText = "Tinggi Opening (cm):";
-        } else if (selectedProductType === 'daunP') {
-            // IF productType ke Daun Pintu, set Tipe Kusen ke 'none' (Tidak Ada)
-            frameTypeSelect.value = 'none';
-            console.log("Pilihan: Daun Pintu. Tipe Kusen diatur ke Tidak Ada.");
-
-            // TAMBAHAN: Ganti judul labelnya
-    labelLebar.innerText = "Lebar Daun (cm):";
-    labelTinggi.innerText = "Tinggi Daun (cm):";
+            <a href="deck.html" class="card">
+                <div class="card-icon">🪵</div>
+                <h3>Duma Deck</h3>
+                <p>Hitung kebutuhan deck, deckbase, joint clip, edge clip berdasarkan luas area.</p>
+                <span class="card-arrow">→ Mulai Hitung</span>
+            </a>
             
-        } else {
-// Kembalikan ke judul awal jika memilih selain Daun Pintu
-
-        }
-    });
-
-    // Opsional: Jalankan logika sekali saat halaman dimuat
-    // agar nilai awal juga disesuaikan berdasarkan pilihan default di 'hitungApa'
-    productTypeSelect.dispatchEvent(new Event('change'));
-});
-</script>
-                  
-                <div class="options-grid">
-                    <div class="option-box">
-                        <div class="option-title">Laminating Daun Pintu</div>
-                        <div class="form-group">
-                            <label for="doorLaminate" data-hint="PILIH JENIS LAMINATING">Choose</label>
-                            <select id="doorLaminate">
-                                <option value="none">Tidak Ada</option>
-                                <option value="2s">2 Sisi (Rp 525.000)</option>
-                                <option value="6s">6 Sisi (Rp 612.500)</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="option-box">
-                        <div class="option-title">Laminating Kusen</div>
-                        <div class="form-group">
-                            <label for="frameLaminate" data-hint="PILIH JENIS LAMINATING">Choose</label>
-                            <select id="frameLaminate">
-                                <option value="none">Tidak Ada</option>
-                                <option value="LK">Kusen (Rp 200.000)</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-       
-                <div id="infoMessage" class="info-message"></div>
-                <div id="errorMessage" class="error-message"></div>
-                <div id="calculationInfo" class="calculation-info"></div>
-                
-                <button onclick="hitungHarga()">HITUNG</button>
-                
-                <div id="result" class="result">
-    <h2 class="result-title">Rincian Harga Duma Door</h2>
-
-    <div class="result-item">
-        <span id="labelDoorType">Tipe Pintu :</span>
-        <span id="doorTypeName" class="price">-</span>
+            <a href="about.html" class="card">
+                <div class="card-icon">ℹ️</div>
+                <h3>About CALDU</h3>
+                <p>Pelajari lebih lanjut tentang platform ini dan fitur yang tersedia.</p>
+                <span class="card-arrow">→ Lihat Info</span>
+            </a>
+        </section>
+        
+        <footer>
+            <p>© 2026 <a href="https://github.com/xiowel" target="_blank" rel="noopener noreferrer">XioweL</a>. All Rights Reserved.</p>
+        </footer>
     </div>
-
-    <div class="result-item">
-        <span id="labelDaunPintu">Daun Pintu :</span>
-        <span id="hargaDaunPintu" class="price">Rp 0</span>
-    </div>
-
-    <div class="result-item">
-        <span>Ongkos Potong :</span>
-        <span id="ongkosPotong" class="price">Rp 0</span>
-    </div>
-
-    <div class="result-item" id="rowVerstek" style="display: none;">
-    <span>Ongkos Verstek :</span>
-    <span id="hargaVerstek" class="price">Rp 0</span>
-</div>
-
-<div class="result-item" id="rowAlumini" style="display: none;">
-    <span>Aluminium Strip :</span>
-    <span id="hargaAlumini" class="price">Rp 0</span>
-</div>
-<div class="result-item" id="rowRouterS" style="display: none;">
-    <span>Router Simple :</span>
-    <span id="hargaRouterS" class="price">Rp 0</span>
-</div>
-<div class="result-item" id="rowRouterC" style="display: none;">
-    <span>Router Complex :</span>
-    <span id="hargaRouterC" class="price">Rp 0</span>
-</div>
-<div class="result-item" id="rowLubangS" style="display: none;">
-    <span>Lubang Handle Simple :</span>
-    <span id="hargaLubangS" class="price">Rp 0</span>
-</div>
-<div class="result-item" id="rowLubangC" style="display: none;">
-    <span>Lubang Handle Complex :</span>
-    <span id="hargaLubangC" class="price">Rp 0</span>
-</div>
-    <div class="result-item">
-        <span id="labelFrameType">Tipe Kusen :</span>
-        <span id="frameTypeName" class="price">-</span>
-    </div>
-
-    <div class="result-item">
-        <span id="labelKusen">Kusen :</span>
-        <span id="hargaKusen" class="price">Rp 0</span>
-    </div>
-
-    <div class="result-item">
-        <span id="labelLamDaun">Laminating Daun Pintu :</span>
-        <span id="hargaLamDaun" class="price">Rp 0</span>
-    </div>
-
-    <div class="result-item">
-        <span id="labelLamKusen">Laminating Kusen :</span>
-        <span id="hargaLamKusen" class="price">Rp 0</span>
-    </div>
-
-
-    <div class="result-section">
-        <div class="result-total">
-            <div class="result-finishing">
-                <span id="BATAS">UNFINISHED</span><br>
-            </div>
-            <div class="result-item">
-                <span>Daun Pintu :</span>
-                <span id="totalWithoutKusen" class="price">Rp 0</span>
-            </div>
-<div class="result-item" id="rowTotalUnfinished"> <span>Daun Pintu + Kusen :</span>
-    <span id="totalUnfinished" class="price">Rp 0</span>
-</div>
-
-            <div class="result-finishing">
-                <span id="BATAS">FINISHED</span>
-            </div>
-            <div class="result-item">
-                <span id="labelFinishedWithoutKusen">Daun Pintu :</span>
-                <span id="totalFinishedWithoutKusen" class="price">Rp 0</span>
-            </div>
-<div class="result-item" id="rowTotalFinished"> <span id="labelFinished">Daun Pintu + Kusen :</span>
-    <span id="totalFinished" class="price">Rp 0</span>
-</div>
-        </div>
-    </div>
-</div>
-<div class="action-buttons">
-
-    <button onclick="copyToClipboard()" class="btn-copy">Salin Rincian</button>
-    <button onclick="resetForm()" class="btn-reset">Hitung Ulang</button>
-</div>
-                
-                <p class="note"><span>© 2026 <a href="https://github.com/xiowel" target="_blank" rel="noopener noreferrer">XioweL</a>. All Rights Reserved.</span></p>
-            </div>
-        </div>
-
-        <!-- About Section -->
-        <div id="about-section" class="content-section">
-            <div class="container">
-                <div class="section-header">
-                    <h1>ABOUT CALDU</h1>
-                    <p>Learn more about our website</p>
-                </div>
-                <div class="about-content" style="text-align: center;">
-                    <p>Website untuk mempermudah hidup kalian selama bekerja di LIMANDARA 😝😝</p>
-                    <h2>CARA PEMAKAIAN WEBSITE</h2>
-                </div>
-                <div class="nav-list-hint" style="text-align: center;">
-                <ol>PILIH MENU DAUN PINTU / OPENINGAN</ol>
-                <ol>MASUKAN UKURAN LEBAR DAN TINGGI</ol>
-                <ol>JIKA UKURAN PAS SESUAI STANDAR (ex. 82 x 240) -45.000 ( JASA POTONG )</ol>
-                <ol>DONE SELAMAT MENIKMATI</li>
-                <ol>TOLONG KOREKSI JIKA ADA KESALAHAN HITUNG, FEEDBACK DARI KALIAN SANGAT BERARTI 😁😝</li>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- News Section -->
-        <div id="news-section" class="content-section">
-            <div class="container">
-                <div class="section-header">
-                    <h1>What's New</h1>
-                    <p>Latest updates and features</p>
-                </div>
-                <div class="news-content">
-                    <p>💥 Menghitung Pintu 240-280cm</p>
-                    <p>💥 Memisahkan Perhitungan Daun Pintu & Openingan</p>
-                    <p>💥 Add New Add-ons ongkos dll</p>
-                    <p>💥 Add Fitur Diskon Produk</p>
-                    <p>💥 Add Copy Rincian Produk</p>
-                    <p>💥 Update Harga Duma Door</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="./js/script.js"></script>
-
-    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.1/dist/dotlottie-wc.js" type="module"></script>
-
-    <!-- BLOCK CTRL + U -->
-<script>
-document.addEventListener("keydown", function(e) {
-    // Check for Ctrl+U (keyCode 85)
-    if (e.ctrlKey && e.keyCode === 85) {
-        e.preventDefault(); // Prevent the default action (viewing source)
-        alert("Ctrl+U is disabled on this page!"); // Optional: show an alert
-    }
-});
-</script>
-
-
 </body>
 </html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CALDU - Kalkulator Duma Deck</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <style>
+        body { padding: 0 0 20px 0; }
+        .page-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            background: linear-gradient(135deg, #0a3530, #1a4a45);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .back-btn {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            text-decoration: none;
+            flex-shrink: 0;
+            margin: 0;
+            padding: 0;
+            transition: background 0.2s;
+        }
+        .back-btn:hover, .back-btn:active { background: rgba(255,255,255,0.28); }
+        .header-title { flex: 1; }
+        .header-title h1 { font-size: 16px; font-weight: 700; margin: 0; letter-spacing: 1px; }
+        .header-title p { font-size: 11px; opacity: 0.7; margin: 0; }
+        .theme-toggle-btn {
+            background: rgba(255,255,255,0.1);
+            border: none; color: white;
+            width: 36px; height: 36px;
+            border-radius: 50%; cursor: pointer;
+            font-size: 16px; display: flex;
+            align-items: center; justify-content: center;
+            transition: background 0.2s;
+            margin: 0; padding: 0;
+        }
+        .theme-toggle-btn:hover { background: rgba(255,255,255,0.2); }
+        .container { border-radius: 0; box-shadow: none; }
+        @media (min-width: 768px) {
+            body { padding: 0 0 20px 0; }
+            .page-header { max-width: 700px; margin: 0 auto; }
+            .container { max-width: 700px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <a href="index.html" class="back-btn" title="Kembali">&#8592;</a>
+    <div class="header-title">
+        <h1>&#129395; DUMA DECK</h1>
+        <p>Kalkulator Kebutuhan & Estimasi Harga Deck</p>
+    </div>
+    <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Dark Mode">&#127769;</button>
+</div>
+
+<div class="container">
+    <p class="description">HANYA UNTUK ESTIMASI HARGA &mdash; JANGAN DIJADIKAN PATOKAN, CEK KEMBALI!!</p>
+
+    <div class="form-group">
+        <label for="deckPanjang">Panjang Area (cm):</label>
+        <input type="number" id="deckPanjang" placeholder="Contoh: 500">
+    </div>
+
+    <div class="form-group">
+        <label for="deckLebar">Lebar Area (cm):</label>
+        <input type="number" id="deckLebar" placeholder="Contoh: 300">
+    </div>
+
+    <div class="form-group">
+        <label for="deckArah">Arah Pasang Decking:</label>
+        <select id="deckArah">
+            <option value="panjang">Memanjang ke Panjang</option>
+            <option value="lebar">Memanjang ke Lebar</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="deckDiskon">Diskon ( % )</label>
+        <input type="number" id="deckDiskon" placeholder="0" min="0" max="100">
+        <small style="color: #666; font-style: italic;">*Berlaku untuk semua item</small>
+    </div>
+
+    <div id="deckErrorMessage" class="error-message"></div>
+
+    <button onclick="hitungDeck()">HITUNG</button>
+
+    <div id="deckResult" class="result" style="display:none;">
+        <h2 class="result-title">Rincian Kebutuhan Duma Deck</h2>
+
+        <div class="result-item">
+            <span>Luas Area:</span>
+            <span id="deckLuasArea" class="price">-</span>
+        </div>
+
+        <div class="result-finishing"><span>DUMA DECK</span></div>
+        <div class="result-item">
+            <span id="deckLabelDeck">Duma Deck:</span>
+            <span id="deckJumlahDeck" class="price">-</span>
+        </div>
+        <div class="result-item" style="font-size:12px;color:#888;">
+            <span>Saran:</span>
+            <span id="deckSaranDeck">-</span>
+        </div>
+        <div class="result-item">
+            <span>Harga Deck:</span>
+            <span id="deckHargaDeck" class="price">-</span>
+        </div>
+
+        <div class="result-finishing"><span>DECK BASE 45</span></div>
+        <div class="result-item">
+            <span id="deckLabelBase">Deck Base:</span>
+            <span id="deckJumlahBase" class="price">-</span>
+        </div>
+        <div class="result-item" style="font-size:12px;color:#888;">
+            <span>Saran:</span>
+            <span id="deckSaranBase">-</span>
+        </div>
+        <div class="result-item">
+            <span>Harga Deck Base:</span>
+            <span id="deckHargaBase" class="price">-</span>
+        </div>
+
+        <div class="result-finishing"><span>CLIP</span></div>
+        <div class="result-item">
+            <span>Joint Clip:</span>
+            <span id="deckJumlahJoint" class="price">-</span>
+        </div>
+        <div class="result-item">
+            <span>Harga Joint Clip:</span>
+            <span id="deckHargaJoint" class="price">-</span>
+        </div>
+        <div class="result-item">
+            <span>Edge Clip:</span>
+            <span id="deckJumlahEdge" class="price">-</span>
+        </div>
+        <div class="result-item">
+            <span>Harga Edge Clip:</span>
+            <span id="deckHargaEdge" class="price">-</span>
+        </div>
+    </div>
+
+    <div class="result-section" id="deckTotalSection" style="display:none;">
+        <div class="result-total">
+            <div class="result-finishing"><span>TOTAL</span></div>
+            <div class="result-item">
+                <span>Total Keseluruhan:</span>
+                <span id="deckTotal" class="price">-</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="deckActionButtons" style="display:none; margin-top:15px;">
+        <button onclick="copyDeckKebutuhan()" class="btn-copy" style="width:100%; margin-bottom:10px;">Salin Kebutuhan</button>
+        <button onclick="resetDeck()" class="btn-reset" style="width:100%;">Hitung Ulang</button>
+    </div>
+
+    <p class="note">
+        <span>&copy; 2026 <a href="https://github.com/xiowel" target="_blank" rel="noopener noreferrer">XioweL</a>. All Rights Reserved.</span>
+    </p>
+</div>
+
+<script src="./js/script.js"></script>
+<script>
+(function() {
+    const saved = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', saved);
+    const btn = document.getElementById('themeToggleBtn');
+    btn.textContent = saved === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
+    btn.addEventListener('click', function() {
+        const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        btn.textContent = next === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
+    });
+})();
+
+document.addEventListener('DOMContentLoaded', function() {
+    ['deckPanjang','deckLebar','deckArah','deckDiskon'].forEach(function(id) {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('keyup', function(e) { if (e.key === 'Enter') hitungDeck(); });
+    });
+});
+
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.keyCode === 85) e.preventDefault();
+});
+</script>
+</body>
+</html>

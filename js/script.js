@@ -541,7 +541,8 @@ function setupThemeToggle() {
 
 
 function resetForm() {
-    document.querySelectorAll('input').forEach(input => input.value = '');
+    document.querySelectorAll('input[type="number"]').forEach(input => input.value = '');
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
     document.querySelectorAll('select').forEach(select => select.selectedIndex = 0);
     document.getElementById('result').style.display = 'none';
     document.getElementById('calculationInfo').style.display = 'none';
@@ -560,12 +561,11 @@ function copyToClipboard() {
     const totalFinished = document.getElementById('totalFinished').textContent;
 
     const frameType = document.getElementById('frameType').value;
-    const garis = '➖➖➖➖➖➖➖➖➖➖';
 
     let text = '';
     text += `Tipe Pintu : ${doorTypeName}\n`;
     text += `Tipe Kusen : ${frameTypeName}\n`;
-    text += `\n${garis}\n`;
+    text += `\n`
     text += `UNFINISHED\n`;
     text += `🔹 Daun Pintu         : ${totalWithoutKusen}\n`;
     if (frameType !== 'none') {
@@ -576,9 +576,287 @@ function copyToClipboard() {
     if (frameType !== 'none') {
         text += `🔸 Daun Pintu + Kusen : ${totalFinished}\n`;
     }
-    text += `${garis}`;
 
     navigator.clipboard.writeText(text).then(() => {
         alert("Rincian harga berhasil disalin!");
+    });
+}
+// ===== DUMA DECK CALCULATOR =====
+
+const hargaDeck = {
+    '3m': 450000,
+    '4m': 600000,
+    '5m': 750000
+};
+
+const hargaBase = {
+    '3m': 120000,
+    '4m': 160000,
+    '5m': 200000
+};
+
+const hargaJointClip = 5200;
+const hargaEdgeClip = 5200;
+
+// Cari kombinasi batang paling efisien untuk 1 baris
+// Return: { kombinasi: [{label, jumlah}], totalBatangPerBaris, saranPerBaris, wasteCm, hargaPerBaris }
+function cariEfisienBatang(panjangCm, hargaPerPanjang, bisaDipotong = true) {
+    const pilihan = [
+        { panjang: 300, label: '3m' },
+        { panjang: 400, label: '4m' },
+        { panjang: 500, label: '5m' }
+    ];
+
+    // Kasus panjang <= 500cm: cari 1 batang atau potong dari 1 batang
+    if (panjangCm <= 500) {
+        let hasil = null;
+        let bestWaste = Infinity;
+        let bestSaran = '';
+        let bestKombinasi = [];
+        let bestHargaPerBaris = 0;
+
+        for (const p of pilihan) {
+            const potonganPer1Batang = Math.floor(p.panjang / panjangCm);
+            if (potonganPer1Batang >= 1) {
+                const waste = p.panjang - (potonganPer1Batang * panjangCm);
+                if (waste < bestWaste || (waste === bestWaste && hargaPerPanjang[p.label] < bestHargaPerBaris)) {
+                    bestWaste = waste;
+                    hasil = p;
+                    bestHargaPerBaris = hargaPerPanjang[p.label];
+                    bestKombinasi = [{ label: p.label, jumlah: 1 }];
+                    if (potonganPer1Batang > 1) {
+                        bestSaran = `Pakai ${p.label}, 1 batang dipotong jadi ${potonganPer1Batang}x${panjangCm}cm (sisa ${waste}cm)`;
+                    } else {
+                        bestSaran = `Pakai ${p.label}, sisa ${waste}cm`;
+                    }
+                }
+            }
+        }
+        return {
+            kombinasi: bestKombinasi,
+            potonganPer1Batang: Math.floor(hasil.panjang / panjangCm),
+            saranPerBaris: bestSaran,
+            wasteCm: bestWaste,
+            hargaPerBaris: bestHargaPerBaris
+        };
+    }
+
+    // Kasus panjang > 500cm: pakai sambungan
+    // Selalu pakai 5m sebagai batang utama, sisa dicari yang paling efisien
+    const sisaCm = panjangCm - 500;
+    let bestSisa = null;
+    let bestWasteSisa = Infinity;
+    let bestPotonganSisa = 1;
+
+    for (const p of pilihan) {
+        if (bisaDipotong) {
+            // Deck/deckbase: sisa bisa dipotong, cari yang paling efisien
+            const potongan = Math.floor(p.panjang / sisaCm);
+            if (potongan >= 1) {
+                const waste = p.panjang - (potongan * sisaCm);
+                if (waste < bestWasteSisa || (waste === bestWasteSisa && hargaPerPanjang[p.label] < hargaPerPanjang[bestSisa ? bestSisa.label : p.label])) {
+                    bestWasteSisa = waste;
+                    bestSisa = p;
+                    bestPotonganSisa = potongan;
+                }
+            }
+        } else {
+            // Fascia: panjang kontinyu, cari batang terkecil yang cukup untuk sisaCm
+            if (p.panjang >= sisaCm) {
+                const waste = p.panjang - sisaCm;
+                if (waste < bestWasteSisa || (waste === bestWasteSisa && hargaPerPanjang[p.label] < hargaPerPanjang[bestSisa.label])) {
+                    bestWasteSisa = waste;
+                    bestSisa = p;
+                    bestPotonganSisa = 1;
+                }
+            }
+        }
+    }
+
+    if (!bestSisa) {
+        bestSisa = { panjang: 500, label: '5m' };
+        bestWasteSisa = 0;
+        bestPotonganSisa = 1;
+    }
+
+    // Berapa btg sisa yang dibutuhkan per jumlahBaris (diperhitungkan di hitungTotalBatangDanHarga)
+    const kombinasi = [
+        { label: '5m', jumlah: 1, potonganPer1: 1 },
+        { label: bestSisa.label, jumlah: 1, potonganPer1: bestPotonganSisa }
+    ];
+    const saranPerBaris = `Sambungan: 1 btg 5m + 1 btg ${bestSisa.label} (waste ${bestWasteSisa}cm per potongan)`;
+    const hargaPerBaris = hargaPerPanjang['5m'] + hargaPerPanjang[bestSisa.label];
+
+    return {
+        kombinasi,
+        potonganPer1Batang: 1,
+        saranPerBaris,
+        wasteCm: bestWasteSisa,
+        hargaPerBaris
+    };
+}
+
+// Hitung total batang dari kombinasi x jumlahBaris, dan harga total
+function hitungTotalBatangDanHarga(efisien, jumlahBaris, hargaPerPanjang, multiplier) {
+    const { kombinasi, potonganPer1Batang } = efisien;
+
+    // Kasus bisa dipotong jadi beberapa baris dari 1 batang (panjang <= 500cm)
+    if (kombinasi.length === 1 && potonganPer1Batang > 1) {
+        const totalBatang = Math.ceil(jumlahBaris / potonganPer1Batang);
+        const hargaAsli = totalBatang * hargaPerPanjang[kombinasi[0].label];
+        return {
+            totalBatang,
+            labelBatang: `${totalBatang} btg ${kombinasi[0].label}`,
+            hargaAsli,
+            harga: hargaAsli * multiplier
+        };
+    }
+
+    // Kasus sambungan (panjang > 500cm)
+    // Batang utama (5m): 1 per baris
+    // Batang sisa: 1 batang bisa untuk beberapa baris jika potonganPer1 > 1
+    let totalBatang = 0;
+    let labelParts = [];
+    let hargaAsli = 0;
+
+    for (const k of kombinasi) {
+        const potonganPer1 = k.potonganPer1 || 1;
+        const jml = Math.ceil(jumlahBaris / potonganPer1);
+        totalBatang += jml;
+        labelParts.push(`${jml} btg ${k.label}`);
+        hargaAsli += jml * hargaPerPanjang[k.label];
+    }
+
+    return {
+        totalBatang,
+        labelBatang: labelParts.join(' + '),
+        hargaAsli,
+        harga: hargaAsli * multiplier
+    };
+}
+
+function hitungDeck() {
+    document.getElementById('deckErrorMessage').style.display = 'none';
+    document.getElementById('deckResult').style.display = 'none';
+    document.getElementById('deckActionButtons').style.display = 'none';
+
+    const panjang = parseFloat(document.getElementById('deckPanjang').value) || 0;
+    const lebar = parseFloat(document.getElementById('deckLebar').value) || 0;
+    const arah = document.getElementById('deckArah').value;
+
+    const discPersen = parseFloat(document.getElementById('deckDiskon').value) || 0;
+    const multiplier = (100 - discPersen) / 100;
+
+    if (panjang <= 0 || lebar <= 0) {
+        document.getElementById('deckErrorMessage').innerHTML = 'Masukkan ukuran area yang valid!';
+        document.getElementById('deckErrorMessage').style.display = 'block';
+        return;
+    }
+
+    // Tentukan dimensi berdasarkan arah pasang
+    // arahPasang = panjang batang deck searah dengan ini
+    // arahBaris = tegak lurus, dibagi 14.7 untuk jumlah baris
+    let panjangDeck, lebarBaris, panjangBase, jarakBase;
+    if (arah === 'panjang') {
+        panjangDeck = panjang; // batang deck memanjang ke panjang
+        lebarBaris = lebar;   // jumlah baris = lebar / 14.5
+        panjangBase = lebar;  // panjang batang deckbase = lebar (tegak lurus deck)
+        jarakBase = panjang;  // jarak antar baris base = sepanjang panjang
+    } else {
+        panjangDeck = lebar;  // batang deck memanjang ke lebar
+        lebarBaris = panjang; // jumlah baris = panjang / 14.5
+        panjangBase = panjang; // panjang batang deckbase = panjang (tegak lurus deck)
+        jarakBase = lebar;    // jarak antar baris base = sepanjang lebar
+    }
+
+    // === HITUNG DECK ===
+    const jumlahBaris = Math.ceil(lebarBaris / 14.7);
+    const efisienDeck = cariEfisienBatang(panjangDeck, hargaDeck);
+    const hasilDeck = hitungTotalBatangDanHarga(efisienDeck, jumlahBaris, hargaDeck, multiplier);
+
+    // === HITUNG DECK BASE ===
+    const jumlahBaseRaw = Math.ceil(jarakBase / 25);
+    const jumlahBase = jumlahBaseRaw + 2;
+    const efisienBase = cariEfisienBatang(panjangBase, hargaBase);
+    const hasilBase = hitungTotalBatangDanHarga(efisienBase, jumlahBase, hargaBase, multiplier);
+
+    // === HITUNG CLIP ===
+    const jumlahJoint = (jumlahBaris - 1) * jumlahBase;
+    const jumlahEdge = jumlahBase * 2;
+    const hargaTotalJoint = jumlahJoint * hargaJointClip * multiplier;
+    const hargaTotalEdge = jumlahEdge * hargaEdgeClip * multiplier;
+
+    // === TOTAL ===
+    const grandTotal = hasilDeck.harga + hasilBase.harga + hargaTotalJoint + hargaTotalEdge;
+
+    // === TAMPILKAN ===
+    const luas = (panjang * lebar / 10000).toFixed(2);
+    document.getElementById('deckLuasArea').textContent = `${luas} m² (${panjang} x ${lebar} cm)`;
+
+    document.getElementById('deckLabelDeck').textContent = `Duma Deck:`;
+    document.getElementById('deckJumlahDeck').textContent = hasilDeck.labelBatang;
+    document.getElementById('deckSaranDeck').textContent = `${jumlahBaris} baris. ${efisienDeck.saranPerBaris}`;
+    document.getElementById('deckHargaDeck').textContent = formatRupiah(hasilDeck.harga);
+
+    document.getElementById('deckLabelBase').textContent = `Deck Base 45:`;
+    document.getElementById('deckJumlahBase').textContent = `${hasilBase.labelBatang} (${jumlahBase} baris)`;
+    document.getElementById('deckSaranBase').textContent = `${jumlahBase} baris base. ${efisienBase.saranPerBaris}`;
+    document.getElementById('deckHargaBase').textContent = formatRupiah(hasilBase.harga);
+
+    document.getElementById('deckJumlahJoint').textContent = `${jumlahJoint} pcs`;
+    document.getElementById('deckHargaJoint').textContent = formatRupiah(hargaTotalJoint);
+    document.getElementById('deckJumlahEdge').textContent = `${jumlahEdge} pcs`;
+    document.getElementById('deckHargaEdge').textContent = formatRupiah(hargaTotalEdge);
+
+    const grandTotalAsli = hasilDeck.hargaAsli + hasilBase.hargaAsli + (jumlahJoint * hargaJointClip) + (jumlahEdge * hargaEdgeClip);
+    if (discPersen > 0) {
+        document.getElementById('deckTotal').innerHTML = `<del>${formatRupiah(grandTotalAsli)}</del> <span style="color:red">(-${discPersen}%)</span><br><strong>${formatRupiah(grandTotal)}</strong>`;
+    } else {
+        document.getElementById('deckTotal').textContent = formatRupiah(grandTotal);
+    }
+
+    document.getElementById('deckResult').style.display = 'block';
+    document.getElementById('deckTotalSection').style.display = 'block';
+    document.getElementById('deckActionButtons').style.display = 'block';
+}
+
+function resetDeck() {
+    document.getElementById('deckPanjang').value = '';
+    document.getElementById('deckLebar').value = '';
+    document.getElementById('deckDiskon').value = '';
+    document.getElementById('deckArah').selectedIndex = 0;
+    document.getElementById('deckResult').style.display = 'none';
+    document.getElementById('deckTotalSection').style.display = 'none';
+    document.getElementById('deckActionButtons').style.display = 'none';
+    document.getElementById('deckErrorMessage').style.display = 'none';
+}
+
+function copyDeckKebutuhan() {
+    const deckLabel = document.getElementById('deckLabelDeck').textContent;
+    const panjangBatangDeck = deckLabel.match(/\((\d+m)\)/)?.[1] || '';
+    const jumlahDeck = document.getElementById('deckJumlahDeck').textContent.replace(' batang', '');
+
+    const baseLabel = document.getElementById('deckLabelBase').textContent;
+    const panjangBatangBase = baseLabel.match(/\((\d+m)\)/)?.[1] || '';
+    const jumlahBaseText = document.getElementById('deckJumlahBase').textContent;
+    const jumlahBase = jumlahBaseText.match(/^(\d+)/)?.[1] || '';
+
+    const jumlahJoint = document.getElementById('deckJumlahJoint').textContent.replace(' pcs', '');
+    const jumlahEdge = document.getElementById('deckJumlahEdge').textContent.replace(' pcs', '');
+
+    const panjang = document.getElementById('deckPanjang').value;
+    const lebar = document.getElementById('deckLebar').value;
+    const garis = '━━━━━━━━━━━━━━━━━━━━';
+
+    let text = '';
+    text += `*KEBUTUHAN DUMA DECK*\n`;
+    text += `*(${panjang}cm x ${lebar}cm)*\n`;
+    text += `- *Deck* ${panjangBatangDeck} → ${jumlahDeck} btg\n`;
+    text += `- *Deck Base* ${panjangBatangBase} → ${jumlahBase} btg\n`;
+    text += `- *Joint Clip* → ${jumlahJoint} pcs\n`;
+    text += `- *Edge Clip* → ${jumlahEdge} pcs\n`;
+
+    navigator.clipboard.writeText(text).then(() => {
+        alert("Kebutuhan material berhasil disalin!");
     });
 }

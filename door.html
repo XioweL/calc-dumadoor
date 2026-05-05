@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CALDU - Kalkulator Duma Door</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <style>
+        body { padding: 0 0 20px 0; }
+        .page-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            background: linear-gradient(135deg, #0a3530, #1a4a45);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .back-btn {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            text-decoration: none;
+            flex-shrink: 0;
+            margin: 0;
+            padding: 0;
+            transition: background 0.2s;
+        }
+        .back-btn:hover, .back-btn:active { background: rgba(255,255,255,0.28); }
+        .header-title { flex: 1; }
+        .header-title h1 { font-size: 16px; font-weight: 700; margin: 0; letter-spacing: 1px; }
+        .header-title p { font-size: 11px; opacity: 0.7; margin: 0; }
+        .theme-toggle-btn {
+            background: rgba(255,255,255,0.1);
+            border: none; color: white;
+            width: 36px; height: 36px;
+            border-radius: 50%; cursor: pointer;
+            font-size: 16px; display: flex;
+            align-items: center; justify-content: center;
+            transition: background 0.2s;
+            margin: 0; padding: 0;
+        }
+        .theme-toggle-btn:hover { background: rgba(255,255,255,0.2); }
+        .container { border-radius: 0; box-shadow: none; }
+        @media (min-width: 768px) {
+            body { padding: 0 0 20px 0; }
+            .page-header { max-width: 700px; margin: 0 auto; }
+            .container { max-width: 700px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <a href="index.html" class="back-btn" title="Kembali">&#8592;</a>
+    <div class="header-title">
+        <h1>&#128682; DUMA DOOR</h1>
+        <p>Kalkulator Estimasi Harga Pintu</p>
+    </div>
+    <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Dark Mode">&#127769;</button>
+</div>
+
+<div class="container">
+    <div class="logo-container" style="display: grid; place-items: center;">
+        <img src="images/kicau mania.webp" style="width: 150px; height: 150px;" alt="header">
+    </div>
+
+    <p class="description">HANYA UNTUK ESTIMASI HARGA &mdash; JANGAN DIJADIKAN PATOKAN, CEK KEMBALI!!</p>
+
+    <div class="form-group">
+        <label for="hitungApa">Mau Hitung Apa?</label>
+        <select id="hitungApa">
+            <option value="daunP">Daun Pintu</option>
+            <option value="openAN" selected>Openingan</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="doorType">Tipe Pintu:</label>
+        <select id="doorType">
+            <option value="economy">Economy</option>
+            <option value="standard" selected>Standard</option>
+            <option value="deluxe">Deluxe</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="width" id="labelLebar">Lebar Opening (cm):</label>
+        <input type="number" id="width" placeholder="Contoh: 82 OR 86.5">
+    </div>
+
+    <div class="form-group">
+        <label for="height" id="labelTinggi">Tinggi Opening (cm):</label>
+        <input type="number" id="height" placeholder="Contoh: 220 OR 222.5">
+    </div>
+
+    <div class="form-group">
+        <label for="frameType">Tipe Kusen:</label>
+        <select id="frameType">
+            <option value="none">Tidak Ada</option>
+            <option value="DJD">DJD</option>
+            <option value="DJE">DJE</option>
+            <option value="DJA">DJA</option>
+            <option value="DJC">DJC</option>
+            <option value="DJF">DJF</option>
+            <option value="DJG">DJG</option>
+        </select>
+    </div>
+
+    <div class="options-grid">
+        <div class="option-box">
+            <div class="option-title">Add-ons (Opsional)</div>
+            <div class="addon-item">
+                <label class="modern-checkbox">
+                    <input type="checkbox" id="addonVerstek" value="30000">
+                    <span class="checkbox-text">Ongkos Verstek (Rp 30.000)</span>
+                </label>
+            </div>
+            <div class="addon-item">
+                <label class="modern-checkbox">
+                    <input type="checkbox" id="addonRouterS" value="35000">
+                    <span class="checkbox-text">Router Simple (Rp 35.000)</span>
+                </label>
+            </div>
+            <div class="addon-item">
+                <label class="modern-checkbox">
+                    <input type="checkbox" id="addonRouterC" value="40000">
+                    <span class="checkbox-text">Router Complex (Rp 40.000)</span>
+                </label>
+            </div>
+            <div class="addon-item">
+                <label class="modern-checkbox">
+                    <input type="checkbox" id="addonLubangS" value="30000">
+                    <span class="checkbox-text">Lubang Handle Simple (Rp 30.000)</span>
+                </label>
+            </div>
+            <div class="addon-item">
+                <label class="modern-checkbox">
+                    <input type="checkbox" id="addonLubangC" value="50000">
+                    <span class="checkbox-text">Lubang Handle Complex (Rp 50.000)</span>
+                </label>
+            </div>
+            <div class="addon-item">
+                <label class="modern-checkbox">
+                    <input type="checkbox" id="addonAlumini" value="180000">
+                    <span class="checkbox-text">Aluminium Strip (Rp 180.000)</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="option-box">
+            <div class="option-title">Diskon ( % )</div>
+            <div style="margin-top: 10px;">
+                <input type="number" id="discountPersen" placeholder="0" min="0" max="100"
+                       style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                <small style="color: #666; font-style: italic;">*Hanya memotong harga Daun &amp; Kusen</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="options-grid">
+        <div class="option-box">
+            <div class="option-title">Laminating Daun Pintu</div>
+            <div class="form-group">
+                <label for="doorLaminate">Choose</label>
+                <select id="doorLaminate">
+                    <option value="none">Tidak Ada</option>
+                    <option value="2s">2 Sisi (Rp 525.000)</option>
+                    <option value="6s">6 Sisi (Rp 612.500)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="option-box">
+            <div class="option-title">Laminating Kusen</div>
+            <div class="form-group">
+                <label for="frameLaminate">Choose</label>
+                <select id="frameLaminate">
+                    <option value="none">Tidak Ada</option>
+                    <option value="LK">Kusen (Rp 200.000)</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div id="infoMessage" class="info-message"></div>
+    <div id="errorMessage" class="error-message"></div>
+    <div id="calculationInfo" class="calculation-info"></div>
+
+    <button onclick="hitungHarga()">HITUNG</button>
+
+    <div id="result" class="result">
+        <h2 class="result-title">Rincian Harga Duma Door</h2>
+
+        <div class="result-item">
+            <span>Tipe Pintu :</span>
+            <span id="doorTypeName" class="price">-</span>
+        </div>
+        <div class="result-item">
+            <span id="labelDaunPintu">Daun Pintu :</span>
+            <span id="hargaDaunPintu" class="price">Rp 0</span>
+        </div>
+        <div class="result-item">
+            <span>Ongkos Potong :</span>
+            <span id="ongkosPotong" class="price">Rp 0</span>
+        </div>
+        <div class="result-item" id="rowVerstek" style="display:none;">
+            <span>Ongkos Verstek :</span>
+            <span id="hargaVerstek" class="price">Rp 0</span>
+        </div>
+        <div class="result-item" id="rowAlumini" style="display:none;">
+            <span>Aluminium Strip :</span>
+            <span id="hargaAlumini" class="price">Rp 0</span>
+        </div>
+        <div class="result-item" id="rowRouterS" style="display:none;">
+            <span>Router Simple :</span>
+            <span id="hargaRouterS" class="price">Rp 0</span>
+        </div>
+        <div class="result-item" id="rowRouterC" style="display:none;">
+            <span>Router Complex :</span>
+            <span id="hargaRouterC" class="price">Rp 0</span>
+        </div>
+        <div class="result-item" id="rowLubangS" style="display:none;">
+            <span>Lubang Handle Simple :</span>
+            <span id="hargaLubangS" class="price">Rp 0</span>
+        </div>
+        <div class="result-item" id="rowLubangC" style="display:none;">
+            <span>Lubang Handle Complex :</span>
+            <span id="hargaLubangC" class="price">Rp 0</span>
+        </div>
+        <div class="result-item">
+            <span>Tipe Kusen :</span>
+            <span id="frameTypeName" class="price">-</span>
+        </div>
+        <div class="result-item">
+            <span>Kusen :</span>
+            <span id="hargaKusen" class="price">Rp 0</span>
+        </div>
+        <div class="result-item">
+            <span>Laminating Daun Pintu :</span>
+            <span id="hargaLamDaun" class="price">Rp 0</span>
+        </div>
+        <div class="result-item">
+            <span>Laminating Kusen :</span>
+            <span id="hargaLamKusen" class="price">Rp 0</span>
+        </div>
+
+        <div class="result-section">
+            <div class="result-total">
+                <div class="result-finishing"><span>UNFINISHED</span></div>
+                <div class="result-item">
+                    <span>Daun Pintu :</span>
+                    <span id="totalWithoutKusen" class="price">Rp 0</span>
+                </div>
+                <div class="result-item" id="rowTotalUnfinished">
+                    <span>Daun Pintu + Kusen :</span>
+                    <span id="totalUnfinished" class="price">Rp 0</span>
+                </div>
+                <div class="result-finishing"><span>FINISHED</span></div>
+                <div class="result-item">
+                    <span>Daun Pintu :</span>
+                    <span id="totalFinishedWithoutKusen" class="price">Rp 0</span>
+                </div>
+                <div class="result-item" id="rowTotalFinished">
+                    <span>Daun Pintu + Kusen :</span>
+                    <span id="totalFinished" class="price">Rp 0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="action-buttons">
+        <button onclick="copyToClipboard()" class="btn-copy">Salin Rincian</button>
+        <button onclick="resetForm()" class="btn-reset">Hitung Ulang</button>
+    </div>
+
+    <p class="note">
+        <span>&copy; 2026 <a href="https://github.com/xiowel" target="_blank" rel="noopener noreferrer">XioweL</a>. All Rights Reserved.</span>
+    </p>
+</div>
+
+<script src="./js/script.js"></script>
+<script>
+(function() {
+    const saved = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', saved);
+    const btn = document.getElementById('themeToggleBtn');
+    btn.textContent = saved === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
+    btn.addEventListener('click', function() {
+        const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        btn.textContent = next === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
+    });
+})();
+
+document.addEventListener('DOMContentLoaded', function() {
+    const productTypeSelect = document.getElementById('hitungApa');
+    const frameTypeSelect = document.getElementById('frameType');
+    const labelLebar = document.getElementById('labelLebar');
+    const labelTinggi = document.getElementById('labelTinggi');
+
+    productTypeSelect.addEventListener('change', function() {
+        if (this.value === 'openAN') {
+            frameTypeSelect.value = 'DJD';
+            labelLebar.innerText = 'Lebar Opening (cm):';
+            labelTinggi.innerText = 'Tinggi Opening (cm):';
+        } else if (this.value === 'daunP') {
+            frameTypeSelect.value = 'none';
+            labelLebar.innerText = 'Lebar Daun (cm):';
+            labelTinggi.innerText = 'Tinggi Daun (cm):';
+        }
+    });
+    productTypeSelect.dispatchEvent(new Event('change'));
+
+    ['doorType','width','height','frameType','doorLaminate','frameLaminate',
+     'discountPersen','addonVerstek','addonRouterS','addonRouterC',
+     'addonLubangS','addonLubangC','addonAlumini'].forEach(function(id) {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('keyup', function(e) { if (e.key === 'Enter') hitungHarga(); });
+    });
+});
+
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.keyCode === 85) e.preventDefault();
+});
+</script>
+</body>
+</html>
